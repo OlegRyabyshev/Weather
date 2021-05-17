@@ -1,3 +1,5 @@
 package xyz.fcr.weather.objects
 
-data class WeatherInfo(val currentTemp: Int = 27, val currentPressure: Int = 700)
+data class WeatherInfo(
+    val currentTemp: String = "20C", val currentPressure: String = "700"
+) 
