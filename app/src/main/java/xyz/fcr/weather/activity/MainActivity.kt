@@ -1,7 +1,8 @@
-package xyz.fcr.weather
+package xyz.fcr.weather.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import xyz.fcr.weather.R
 import xyz.fcr.weather.fragments.WeatherFragment
 
 class MainActivity : AppCompatActivity() {
