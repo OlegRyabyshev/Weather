@@ -4,96 +4,107 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/weather_gradient"
     tools:context=".activity.MainActivity">
 
     <TextView
         android:id="@+id/textview_city"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
+        android:fontFamily="@font/poppins_light"
         android:gravity="center"
-        android:padding="5dp"
-        android:text="Choose a city"
-        android:textColor="@color/black"
-        android:textSize="25sp"
+        android:padding="3dp"
+        android:text="@string/city"
+        android:textColor="@color/white"
+        android:textSize="19sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.07" />
+        app:layout_constraintVertical_bias="0.04" />
+
+    <TextView
+        android:id="@+id/textview_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_light"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="@string/date_time"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_city" />
 
     <TextView
         android:id="@+id/textview_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
+        android:fontFamily="@font/poppins_light"
         android:gravity="center"
-        android:padding="5dp"
-        android:text="- С"
-        android:textColor="@color/black"
-        android:textSize="80sp"
+        android:layout_margin="10dp"
+        android:text="@string/temp"
+        android:textColor="@color/white"
+        android:textSize="107sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview_city" />
+        app:layout_constraintTop_toBottomOf="@+id/textview_date" />
 
     <TextView
-        android:id="@+id/textview_high_temp"
+        android:id="@+id/textview_temp_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
+        android:layout_margin="10dp"
+        android:fontFamily="@font/poppins_light"
         android:gravity="center"
-        android:text="- С"
-        android:textColor="@color/black"
+        android:text="@string/temp_type"
+        android:textColor="@color/white"
         android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textview_temp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textview_temp"
-        app:layout_constraintTop_toBottomOf="@+id/textview_city" />
+        app:layout_constraintTop_toTopOf="@+id/textview_temp" />
+
 
     <TextView
-        android:id="@+id/textview_low_temp"
+        android:id="@+id/textview_spikes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
+        android:fontFamily="@font/poppins_light"
         android:gravity="center"
-        android:text="- С"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textview_temp"
+        android:padding="3dp"
+        android:text="@string/high_low_feels_like"
+        android:textColor="@color/white"
+        android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textview_temp"
-        app:layout_constraintTop_toBottomOf="@+id/textview_high_temp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_temp" />
+
+    <TextView
+        android:id="@+id/textview_more_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_light"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="@string/weather_status"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_spikes" />
 
     <ImageView
         android:id="@+id/weather_image"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:padding="5dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_cloud"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview_temp">
-
+        app:layout_constraintTop_toBottomOf="@+id/textview_more_info"
+        android:contentDescription="Icon">
     </ImageView>
-
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
-
-    </HorizontalScrollView>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_update"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        app:icon="@drawable/ic_baseline_refresh"
-        app:iconGravity="textStart"
-        app:iconPadding="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

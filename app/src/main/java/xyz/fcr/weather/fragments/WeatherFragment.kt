@@ -18,7 +18,7 @@ class WeatherFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = WeatherFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -27,11 +27,9 @@ class WeatherFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         val weatherObj = weatherImpl.getWeatherData()
 
-        binding.buttonUpdate.setOnClickListener {
+        binding.textviewCity.setOnClickListener {
             binding.textviewCity.text = weatherObj.currentCity
             binding.textviewTemp.text = weatherObj.currentTemp
-            binding.textviewHighTemp.text = weatherObj.highTemp
-            binding.textviewLowTemp.text = weatherObj.lowTemp
         }
     }
 
