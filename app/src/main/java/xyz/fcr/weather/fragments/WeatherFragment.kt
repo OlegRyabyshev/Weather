@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import xyz.fcr.weather.R
 import xyz.fcr.weather.databinding.WeatherFragmentBinding
 import xyz.fcr.weather.objects.WeatherImpl
 import xyz.fcr.weather.objects.WeatherInterface
@@ -31,14 +32,11 @@ class WeatherFragment : Fragment() {
 
         binding.textviewCity.setOnClickListener {
             val manager = activity?.supportFragmentManager
-            if (manager != null) {
-                val bundle = Bundle()
-                bundle.putParcelable(DetailsFragment.BUNDLE_EXTRA, weather)
-                manager.beginTransaction()
-                    .add(R.id.container, DetailsFragment.newInstance(bundle))
-                    .addToBackStack("")
-                    .commitAllowingStateLoss()
-            }
+            manager
+                ?.beginTransaction()
+                ?.replace(R.id.container, CitiesFragment())
+                ?.addToBackStack("")
+                ?.commitAllowingStateLoss()
         }
     }
 
