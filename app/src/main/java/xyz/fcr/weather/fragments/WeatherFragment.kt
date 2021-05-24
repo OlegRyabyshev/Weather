@@ -9,6 +9,7 @@ import xyz.fcr.weather.databinding.WeatherFragmentBinding
 import xyz.fcr.weather.objects.WeatherImpl
 import xyz.fcr.weather.objects.WeatherInterface
 
+
 class WeatherFragment : Fragment() {
     private var _binding: WeatherFragmentBinding? = null
     private val binding get() = _binding!!
@@ -23,13 +24,21 @@ class WeatherFragment : Fragment() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         val weatherObj = weatherImpl.getWeatherData()
 
         binding.textviewCity.setOnClickListener {
-            binding.textviewCity.text = weatherObj.currentCity
-            binding.textviewTemp.text = weatherObj.currentTemp
+            val manager = activity?.supportFragmentManager
+            if (manager != null) {
+                val bundle = Bundle()
+                bundle.putParcelable(DetailsFragment.BUNDLE_EXTRA, weather)
+                manager.beginTransaction()
+                    .add(R.id.container, DetailsFragment.newInstance(bundle))
+                    .addToBackStack("")
+                    .commitAllowingStateLoss()
+            }
         }
     }
 

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.MainActivity">
+    tools:context=".fragments.WeatherFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -32,6 +32,15 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.1" />
 
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/ic_edit"
+            app:layout_constraintBottom_toTopOf="@+id/textview_date"
+            app:layout_constraintStart_toEndOf="@+id/textview_city"
+            app:layout_constraintTop_toTopOf="@+id/textview_city"
+            tools:ignore="ContentDescription" />
+
         <TextView
             android:id="@+id/textview_date"
             android:layout_width="wrap_content"
@@ -39,6 +48,7 @@
             android:fontFamily="@font/poppins_light"
             android:gravity="center"
             android:padding="3dp"
+            android:lines="2"
             android:text="@string/date_time"
             android:textColor="@color/white"
             android:textSize="13sp"
@@ -76,7 +86,7 @@
 
 
         <TextView
-            android:id="@+id/textview_spikes"
+            android:id="@+id/textview_feels_like_temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_light"
@@ -90,7 +100,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textview_temp" />
 
         <TextView
-            android:id="@+id/textview_more_info"
+            android:id="@+id/textview_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_light"
@@ -102,7 +112,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textview_spikes" />
+            app:layout_constraintTop_toBottomOf="@+id/textview_feels_like_temp" />
 
         <ImageView
             android:id="@+id/weather_image"
@@ -112,7 +122,7 @@
             android:src="@drawable/ic_cloud"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textview_more_info"
+            app:layout_constraintTop_toBottomOf="@+id/textview_description"
             tools:ignore="ContentDescription" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -132,7 +142,7 @@
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/recycler_weather" />
+            tools:listitem="@layout/weather_recycler" />
     </LinearLayout>
 </LinearLayout>
 
