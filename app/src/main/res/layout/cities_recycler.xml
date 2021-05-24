@@ -11,7 +11,7 @@
         android:layout_weight="1"
         android:layout_height="match_parent"
         android:text="city_name#"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="20sp"
         android:fontFamily="@font/poppins_light"
         android:gravity="start">

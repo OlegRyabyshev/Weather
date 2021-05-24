@@ -28,15 +28,15 @@ class WeatherFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val weatherObj = weatherImpl.getWeatherData()
-
         binding.textviewCity.setOnClickListener {
+            val citiesFragment = CitiesFragment()
+
             val manager = activity?.supportFragmentManager
             manager
                 ?.beginTransaction()
-                ?.replace(R.id.container, CitiesFragment())
+                ?.replace(R.id.container, citiesFragment)
                 ?.addToBackStack("")
-                ?.commitAllowingStateLoss()
+                ?.commit()
         }
     }
 
