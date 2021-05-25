@@ -29,6 +29,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/cities_recycler" />
+        tools:listitem="@layout/cities_item" />
 </LinearLayout>
 

@@ -1,10 +1,8 @@
 package xyz.fcr.weather.objects
 
 import android.annotation.SuppressLint
-import java.text.SimpleDateFormat
-import java.util.*
 
-data class WeatherObject(
+data class WeatherObj(
     val cityName: String,
     val lat: String,
     val lon: String,
@@ -26,4 +24,8 @@ fun getCurrentDate(): String {
     //val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
    //val currentDate = sdf.format(Date())
     return ("Fri, 31 July 5:40dp")
+}
+
+fun buildArray() {
+//
 }
