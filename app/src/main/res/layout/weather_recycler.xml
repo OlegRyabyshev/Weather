@@ -2,24 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="50dp"
-    android:layout_height="wrap_content"
+    android:layout_height="150dp"
     android:layout_margin="15dp">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:text="12:00"
         android:textColor="@color/black"
         android:textSize="13sp"
         android:fontFamily="@font/poppins_light"
-        android:gravity="center_horizontal">
+        android:gravity="center">
     </TextView>
 
     <ImageView
         android:id="@+id/weather_image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
         android:src="@drawable/ic_cloud_black"
         android:contentDescription="Icon">
@@ -27,7 +29,8 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:text="25°"
         android:textColor="@color/black"
         android:textSize="20sp"
