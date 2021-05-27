@@ -18,5 +18,4 @@
         android:text="city_name#"
         android:textColor="@color/white"
         android:textSize="20sp" />
-
 </LinearLayout>
