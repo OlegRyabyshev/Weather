@@ -5,27 +5,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_blue"
     android:orientation="vertical"
     tools:context=".fragments.WeatherFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/light_blue"
+        android:layout_height="wrap_content"
         tools:context=".activity.MainActivity">
 
         <TextView
             android:id="@+id/textview_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
             android:fontFamily="@font/poppins_light"
             android:gravity="center"
+            android:layout_marginTop="20dp"
             android:padding="3dp"
             android:text="@string/city"
             android:textColor="@color/white"
-            android:textSize="19sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,9 +43,10 @@
             android:id="@+id/textview_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
             android:fontFamily="@font/poppins_light"
             android:gravity="center"
-            android:lines="2"
+            android:lines="1"
             android:padding="3dp"
             android:text="@string/date_time"
             android:textColor="@color/white"
@@ -59,12 +59,12 @@
             android:id="@+id/textview_temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:fontFamily="@font/poppins_light"
             android:gravity="center"
+            android:padding="3dp"
             android:text="@string/temp"
             android:textColor="@color/white"
-            android:textSize="107sp"
+            android:textSize="100sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textview_date" />
@@ -88,8 +88,10 @@
             android:id="@+id/textview_feels_like_temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
             android:fontFamily="@font/poppins_light"
             android:gravity="center"
+            android:lines="1"
             android:padding="3dp"
             android:text="@string/high_low_feels_like"
             android:textColor="@color/white"
@@ -102,8 +104,10 @@
             android:id="@+id/textview_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
             android:fontFamily="@font/poppins_light"
             android:gravity="center"
+            android:lines="1"
             android:padding="3dp"
             android:text="@string/weather_status"
             android:textColor="@color/white"
@@ -115,9 +119,9 @@
 
         <ImageView
             android:id="@+id/weather_image"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
             android:src="@drawable/ic_cloud"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -127,22 +131,44 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/dark_blue"
-        android:layout_marginBottom="10dp"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
         android:orientation="vertical">
 
         <ImageView
             android:layout_width="match_parent"
+            android:layout_height="120dp"
             android:layout_gravity="center_horizontal"
             android:scaleType="centerCrop"
-            android:layout_height="100dp"
-            android:background="@color/light_blue"
             android:src="@drawable/ic_wave"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textview_description"
             tools:ignore="ContentDescription" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:tabIndicatorFullWidth="true"
+            app:tabMode="fixed">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_hourly" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_daily" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_monthly" />
+
+        </com.google.android.material.tabs.TabLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_weather"
@@ -150,6 +176,7 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:orientation="horizontal"
+            android:paddingBottom="10dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/weather_item" />
     </LinearLayout>
