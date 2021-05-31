@@ -6,9 +6,8 @@ data class WeatherObj(
     val cityName: String,
     val lat: String,
     val lon: String,
-    val cityDate: String = getCurrentDate(),
-    val cityTemp: String = getCurrentTemp(),
-    val cityDescription: String = getDescription(),
+    val cityTemp: String,
+    val cityDescription: String,
 )
 
 fun getCurrentTemp(): String {

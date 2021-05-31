@@ -1,7 +1,11 @@
 package xyz.fcr.weather.api
 
-class WeatherDTO(
+data class WeatherDTO(
+    val fact: FactDTO?
+)
 
-) {
-
-}
+data class FactDTO(
+    val temp: Int?,
+    val feels_like: Int?,
+    val condition: String?
+)
