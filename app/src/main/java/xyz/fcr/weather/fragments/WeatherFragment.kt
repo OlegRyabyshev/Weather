@@ -16,6 +16,7 @@ import xyz.fcr.weather.databinding.WeatherFragmentBinding
 import xyz.fcr.weather.objects.City
 import xyz.fcr.weather.objects.RepositoryImpl
 import xyz.fcr.weather.objects.Repository
+import kotlin.math.roundToInt
 
 
 class WeatherFragment : Fragment() {
@@ -37,7 +38,7 @@ class WeatherFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val currentCity = City("Moscow", 55.75, 37.61)
+        val city = City("Moscow", 55.75, 37.61)
 
         binding.textviewCity.setOnClickListener {
             val citiesFragment = CitiesFragment()
@@ -50,19 +51,25 @@ class WeatherFragment : Fragment() {
                 ?.commit()
         }
 
-        WeatherLoader().loadWeather(currentCity.cityLat, currentCity.cityLon, weatherLiveData)
+        WeatherLoader().loadWeather(city.lat, city.lon, weatherLiveData)
 
         weatherLiveData.observe(this, Observer {
 
-            if (it != null) {
-                currentCity.cityTemp = it.current.temp.toInt()
-                currentCity.cityLowTemp = it.daily[0].temp.min.toInt()
-                currentCity.cityMaxTemp = it.daily[0].temp.max.toInt()
-                currentCity.cityFeelsLikeTemp = it.current.feelsLike.toInt()
+            //Copying info from API to City object
+            it?.apply {
+                city.temp = current.temp.roundToInt()
+                city.lowTemp = daily[0].temp.min.roundToInt()
+                city.maxTemp = daily[0].temp.max.roundToInt()
+                city.feelsLikeTemp = current.feelsLike.roundToInt()
+                city.lastUpd = city.lastUpdDate()
             }
 
-            binding.textviewTemp.text = currentCity.cityTemp.toString()
-            binding.textviewFeelsLikeTemp.text = currentCity.feelsLikeLine()
+            binding.apply {
+                textviewTemp.text = city.temp.toString()
+                textviewFeelsLikeTemp.text = city.feelsLikeLine()
+                textviewDate.text = city.lastUpd
+
+            }
 
             val exampleList = generateDummyList(40)
             recycler_view_weather.adapter = WeatherAdapter(exampleList)

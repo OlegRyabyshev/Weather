@@ -149,7 +149,11 @@
         <com.google.android.material.tabs.TabLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:tabTextColor="@color/black"
+            app:tabIndicatorColor="@color/Blue"
             android:background="@color/white"
+            app:tabSelectedTextColor="@color/black"
+            app:tabRippleColor="@color/Blue"
             app:tabIndicatorFullWidth="true"
             app:tabMode="fixed">
 
@@ -162,11 +166,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tab_daily" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tab_monthly" />
 
         </com.google.android.material.tabs.TabLayout>
 

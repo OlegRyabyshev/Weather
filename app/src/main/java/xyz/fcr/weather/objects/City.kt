@@ -1,25 +1,37 @@
 package xyz.fcr.weather.objects
 
+import android.annotation.SuppressLint
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 data class City(
-    val cityName: String,
-    val cityLat: Double,
-    val cityLon: Double
+    val name: String,
+    val lat: Double,
+    val lon: Double
 ) {
-    var cityTemp: Int = 0
-    var cityMaxTemp: Int = 0
-    var cityLowTemp: Int = 0
-    var cityFeelsLikeTemp: Int = 0
-    var cityDescription: String = "Error"
-    var cityHourly: List<CityHourly>? = null
-    var cityDaily: List<CityDaily>? = null
+    var temp: Int = 0
+    var maxTemp: Int = 0
+    var lowTemp: Int = 0
+    var feelsLikeTemp: Int = 0
+    var description: String = "Error"
+    var hourly: List<CityHourly>? = null
+    var daily: List<CityDaily>? = null
+    var lastUpd: String = ""
 
     fun feelsLikeLine(): String {
         val sign: String = "°"
 
-        return "$cityMaxTemp" + sign + "/" + "$cityLowTemp" + sign +
-                " Feels like $cityFeelsLikeTemp" + sign
+        return "$maxTemp" + sign + "/" + "$lowTemp" + sign +
+                " Feels like $feelsLikeTemp" + sign
     }
+
+    @SuppressLint("SimpleDateFormat")
+    fun lastUpdDate(): String = SimpleDateFormat("E, dd MMM KK:mm a")
+        .format(Date())
+        .replace("AM", "am")
+        .replace("PM","pm")
+
 }
 
 data class CityHourly(
