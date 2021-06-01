@@ -5,13 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.cities_fragment.*
-import kotlinx.android.synthetic.main.weather_fragment.*
-import xyz.fcr.weather.R
 import xyz.fcr.weather.databinding.CitiesFragmentBinding
 import xyz.fcr.weather.objects.WeatherObj
-import xyz.fcr.weather.recyclerview.CitiesAdapter
 
 class CitiesFragment : Fragment() {
     private var _binding: CitiesFragmentBinding? = null

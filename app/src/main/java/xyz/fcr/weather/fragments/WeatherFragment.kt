@@ -14,7 +14,6 @@ import xyz.fcr.weather.databinding.WeatherFragmentBinding
 import xyz.fcr.weather.objects.WeatherImpl
 import xyz.fcr.weather.objects.WeatherInterface
 import xyz.fcr.weather.objects.WeatherObj
-import xyz.fcr.weather.recyclerview.WeatherAdapter
 
 
 class WeatherFragment : Fragment() {

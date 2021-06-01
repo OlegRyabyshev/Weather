@@ -1,4 +1,4 @@
-package xyz.fcr.weather.recyclerview
+package xyz.fcr.weather.fragments
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.weather_item.view.*
 import xyz.fcr.weather.R
 import xyz.fcr.weather.objects.WeatherObj
-import xyz.fcr.weather.recyclerview.WeatherAdapter.*
+import xyz.fcr.weather.fragments.WeatherAdapter.*
 
 
 class WeatherAdapter(private val exampleList: List<WeatherObj>) :
