@@ -27,10 +27,13 @@ data class City(
     }
 
     @SuppressLint("SimpleDateFormat")
-    fun lastUpdDate(): String = SimpleDateFormat("E, dd MMM KK:mm a")
-        .format(Date())
-        .replace("AM", "am")
-        .replace("PM","pm")
+    fun updateDateInfo() {
+        lastUpd = SimpleDateFormat("E, dd MMM KK:mm a")
+            .format(Date())
+            .replace("AM", "am")
+            .replace("PM", "pm")
+
+    }
 
 }
 

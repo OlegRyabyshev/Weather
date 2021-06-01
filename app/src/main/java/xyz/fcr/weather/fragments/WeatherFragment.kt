@@ -14,15 +14,12 @@ import xyz.fcr.weather.api.WeatherLiveData
 import xyz.fcr.weather.api.WeatherLoader
 import xyz.fcr.weather.databinding.WeatherFragmentBinding
 import xyz.fcr.weather.objects.City
-import xyz.fcr.weather.objects.RepositoryImpl
-import xyz.fcr.weather.objects.Repository
 import kotlin.math.roundToInt
 
 
 class WeatherFragment : Fragment() {
     private var _binding: WeatherFragmentBinding? = null
     private val binding get() = _binding!!
-    private val repositoryImpl: Repository = RepositoryImpl()
     private val weatherLiveData = WeatherLiveData()
 
     override fun onCreateView(
@@ -61,7 +58,7 @@ class WeatherFragment : Fragment() {
                 city.lowTemp = daily[0].temp.min.roundToInt()
                 city.maxTemp = daily[0].temp.max.roundToInt()
                 city.feelsLikeTemp = current.feelsLike.roundToInt()
-                city.lastUpd = city.lastUpdDate()
+                city.updateDateInfo()
             }
 
             binding.apply {

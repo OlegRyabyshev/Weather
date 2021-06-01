@@ -150,7 +150,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabTextColor="@color/black"
-            app:tabIndicatorColor="@color/Blue"
+            app:tabIndicatorColor="@color/light_blue"
             android:background="@color/white"
             app:tabSelectedTextColor="@color/black"
             app:tabRippleColor="@color/Blue"
