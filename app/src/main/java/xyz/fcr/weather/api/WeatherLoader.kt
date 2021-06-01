@@ -12,21 +12,21 @@ import java.net.URL
 import java.util.stream.Collectors
 import javax.net.ssl.HttpsURLConnection
 
-private const val API_KEY : String = "a73c646cde5c5a1ec0adc33aebba434f"
+private const val API_KEY: String = "a73c646cde5c5a1ec0adc33aebba434f"
 
 class WeatherLoader {
 
     @RequiresApi(Build.VERSION_CODES.N)
     fun loadWeather(lat: Double, lon: Double): WeatherDTO? {
-        var weatherDTO : WeatherDTO? = null
+        var weatherDTO: WeatherDTO? = null
 
         try {
-            val uri =
-                URL("https://api.openweathermap.org/data/2.5/onecall?" +
+            val uri = URL(
+                "https://api.openweathermap.org/data/2.5/onecall?" +
                         "lat=${lat}&lon=${lon}" +
                         "&appid=${API_KEY}" +
-                        "&units=metric")
-
+                        "&units=metric"
+            )
 
             Thread {
                 var connection: HttpsURLConnection? = null
@@ -54,7 +54,6 @@ class WeatherLoader {
             Log.e("", "Fail URI", e)
             e.printStackTrace()
         } finally {
-
             return weatherDTO
         }
     }

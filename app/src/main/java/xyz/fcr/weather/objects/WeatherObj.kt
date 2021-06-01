@@ -1,30 +1,27 @@
 package xyz.fcr.weather.objects
 
-import android.annotation.SuppressLint
 
 data class WeatherObj(
     val cityName: String,
-    val lat: String,
-    val lon: String,
-    val cityTemp: String,
-    val cityDescription: String,
+    val cityLat: Double,
+    val cityLon: Double
+) {
+    var cityTemp: Double = 0.0
+    var cityFeelsLikeTemp: Double = 0.0
+    var cityDescription: String = "Error"
+    var cityHourly: List<CityHourly>? = null
+    var cityDaily: List<CityDaily>? = null
+}
+
+data class CityHourly(
+    val clouds: Int,
+    val rain: Double,
+    val temp: Double
+    //val temp: Temp
 )
 
-fun getCurrentTemp(): String {
-    return "27"
-}
-
-fun getDescription(): String {
-    return "Mostly Cloudy"
-}
-
-@SuppressLint("SimpleDateFormat")
-fun getCurrentDate(): String {
-    //val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
-   //val currentDate = sdf.format(Date())
-    return ("Fri, 31 July 5:40dp")
-}
-
-fun buildArray() {
-//
-}
+data class CityDaily(
+    val clouds: Int,
+    val rain: Double,
+    val temp: Double
+)

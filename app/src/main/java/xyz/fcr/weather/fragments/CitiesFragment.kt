@@ -35,7 +35,7 @@ class CitiesFragment : Fragment() {
     private fun generateDummyList(size: Int): List<WeatherObj> {
         val list = ArrayList<WeatherObj>()
         for (i in 0 until size) {
-            val item = WeatherObj("Moscow", "13", "123","25","Super cloudy")
+            val item = WeatherObj("Moscow", 55.75, 37.61)
             list += item
         }
         return list

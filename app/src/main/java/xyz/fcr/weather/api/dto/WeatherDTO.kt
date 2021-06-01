@@ -11,11 +11,31 @@ data class WeatherDTO(
     val daily: List<Daily>,
 
     @SerializedName("hourly")
-    val hourly: List<Hourly>,
+    val hourly: List<Hourly>
+)
 
-    @SerializedName("lat")
-    val lat: Double,
+data class Hourly(
+    @SerializedName("clouds")
+    val clouds: Int,
+    @SerializedName("dt")
+    val dt: Int,
+    @SerializedName("rain")
+    val rain: Double,
+    @SerializedName("temp")
+    val temp: Double,
+    @SerializedName("weather")
+    val weather: List<Weather>
+)
 
-    @SerializedName("lon")
-    val lon: Double
+data class Daily(
+    @SerializedName("clouds")
+    val clouds: Int,
+    @SerializedName("dt")
+    val dt: Int,
+    @SerializedName("rain")
+    val rain: Double,
+    @SerializedName("temp")
+    val temp: Temp,
+    @SerializedName("weather")
+    val weather: List<Weather>
 )

@@ -34,6 +34,8 @@ class WeatherFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val currentCity = WeatherObj("Moscow", 55.75, 37.61)
+
         binding.textviewCity.setOnClickListener {
             val citiesFragment = CitiesFragment()
 
@@ -45,18 +47,33 @@ class WeatherFragment : Fragment() {
                 ?.commit()
         }
 
+        updateWeather(currentCity, binding)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun updateWeather(currentCity: WeatherObj, binding: WeatherFragmentBinding) {
+        //Data from API
+        val weatherOnline = WeatherLoader().loadWeather(currentCity.cityLat, currentCity.cityLon)
+
+        if (weatherOnline != null) {
+            currentCity.cityTemp = weatherOnline.current.temp
+            currentCity.cityDescription = weatherOnline.current.weather.toString()
+        }
+
+        binding.textviewCity.text = currentCity.cityName
+        binding.textviewTemp.text = currentCity.cityTemp.toString()
+
+
+
         val exampleList = generateDummyList(40)
         recycler_view_weather.adapter = WeatherAdapter(exampleList)
         recycler_view_weather.setHasFixedSize(true)
-
-        val weather = WeatherObj("Moscow", "55.7522", "37.6156", "-2","Super cloudy")
-        WeatherLoader().loadWeather(weather.cityName)
     }
 
     private fun generateDummyList(size: Int): List<WeatherObj> {
         val list = ArrayList<WeatherObj>()
         for (i in 0 until size) {
-            val item = WeatherObj("Moscow", "13", "123", "25","Super cloudy")
+            val item = WeatherObj("Moscow", 55.75, 37.61)
             list += item
         }
         return list
