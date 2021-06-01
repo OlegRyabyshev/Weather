@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.cities_fragment.*
 import xyz.fcr.weather.databinding.CitiesFragmentBinding
-import xyz.fcr.weather.objects.WeatherObj
+import xyz.fcr.weather.objects.City
 
 class CitiesFragment : Fragment() {
     private var _binding: CitiesFragmentBinding? = null
@@ -32,10 +32,10 @@ class CitiesFragment : Fragment() {
         recycler_view_cities.setHasFixedSize(true)
     }
 
-    private fun generateDummyList(size: Int): List<WeatherObj> {
-        val list = ArrayList<WeatherObj>()
+    private fun generateDummyList(size: Int): List<City> {
+        val list = ArrayList<City>()
         for (i in 0 until size) {
-            val item = WeatherObj("Moscow", 55.75, 37.61)
+            val item = City("Moscow", 55.75, 37.61)
             list += item
         }
         return list

@@ -8,11 +8,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.weather_item.view.*
 import xyz.fcr.weather.R
-import xyz.fcr.weather.objects.WeatherObj
 import xyz.fcr.weather.fragments.WeatherAdapter.*
+import xyz.fcr.weather.objects.City
 
 
-class WeatherAdapter(private val exampleList: List<WeatherObj>) :
+class WeatherAdapter(private val exampleList: List<City>) :
     RecyclerView.Adapter<WeatherViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.weather_item, parent, false)

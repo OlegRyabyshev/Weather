@@ -17,7 +17,7 @@ private const val API_KEY: String = "a73c646cde5c5a1ec0adc33aebba434f"
 class WeatherLoader {
 
     @RequiresApi(Build.VERSION_CODES.N)
-    fun loadWeather(lat: Double, lon: Double): WeatherDTO? {
+    fun loadWeather(lat: Double, lon: Double, weatherLiveData: WeatherLiveData) {
         var weatherDTO: WeatherDTO? = null
 
         try {
@@ -46,15 +46,13 @@ class WeatherLoader {
                     e.printStackTrace()
                 } finally {
                     connection?.disconnect()
+                    weatherLiveData.postValue(weatherDTO)
                 }
-
             }.start()
 
         } catch (e: MalformedURLException) {
             Log.e("", "Fail URI", e)
             e.printStackTrace()
-        } finally {
-            return weatherDTO
         }
     }
 
