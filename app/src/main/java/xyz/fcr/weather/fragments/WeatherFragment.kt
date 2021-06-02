@@ -72,8 +72,10 @@ class WeatherFragment : Fragment() {
                 textviewDescription.text = city.description.capitalize()
             }
 
-            recycler_view_weather.adapter = WeatherAdapter(city.hourly)
-            recycler_view_weather.setHasFixedSize(true)
+            if (city.hourly != null) {
+                recycler_view_weather.adapter = WeatherAdapter(city.hourly!!)
+                recycler_view_weather.setHasFixedSize(true)
+            }
         })
     }
 

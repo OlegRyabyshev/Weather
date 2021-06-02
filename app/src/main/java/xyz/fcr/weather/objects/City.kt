@@ -6,7 +6,6 @@ import xyz.fcr.weather.api.dto.Hourly
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 data class City(
     val name: String,
     val lat: Double,
@@ -17,8 +16,8 @@ data class City(
     var lowTemp: Int = 0
     var feelsLikeTemp: Int = 0
     var description: String = "Error"
-    lateinit var hourly: List<Hourly>
-    lateinit var daily: List<Daily>
+    var hourly: List<Hourly>? = null
+    var daily: List<Daily>? = null
     var lastUpd: String = ""
 
     fun feelsLikeLine(): String {
