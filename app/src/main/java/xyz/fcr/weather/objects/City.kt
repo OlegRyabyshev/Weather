@@ -1,6 +1,8 @@
 package xyz.fcr.weather.objects
 
 import android.annotation.SuppressLint
+import xyz.fcr.weather.api.dto.Daily
+import xyz.fcr.weather.api.dto.Hourly
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -15,15 +17,12 @@ data class City(
     var lowTemp: Int = 0
     var feelsLikeTemp: Int = 0
     var description: String = "Error"
-    var hourly: List<CityHourly>? = null
-    var daily: List<CityDaily>? = null
+    lateinit var hourly: List<Hourly>
+    lateinit var daily: List<Daily>
     var lastUpd: String = ""
 
     fun feelsLikeLine(): String {
-        val sign: String = "°"
-
-        return "$maxTemp" + sign + "/" + "$lowTemp" + sign +
-                " Feels like $feelsLikeTemp" + sign
+        return "$maxTemp°/$lowTemp° Feels like $feelsLikeTemp°"
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -37,15 +36,3 @@ data class City(
 
 }
 
-data class CityHourly(
-    val clouds: Int,
-    val rain: Double,
-    val temp: Double
-    //val temp: Temp
-)
-
-data class CityDaily(
-    val clouds: Int,
-    val rain: Double,
-    val temp: Double
-)

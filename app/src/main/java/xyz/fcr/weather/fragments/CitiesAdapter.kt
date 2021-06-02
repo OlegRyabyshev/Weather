@@ -21,7 +21,7 @@ class CitiesAdapter(private val exampleList: List<City>) :
     override fun onBindViewHolder(holder: WeatherViewHolder, position: Int) {
         val currentItem = exampleList[position]
 
-        holder.tvCityName.text = "Moscow"
+        holder.tvCityName.text = currentItem.name
     }
 
     override fun getItemCount() = exampleList.size

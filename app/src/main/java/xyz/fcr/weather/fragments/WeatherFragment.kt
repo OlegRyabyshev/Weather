@@ -58,29 +58,23 @@ class WeatherFragment : Fragment() {
                 city.lowTemp = daily[0].temp.min.roundToInt()
                 city.maxTemp = daily[0].temp.max.roundToInt()
                 city.feelsLikeTemp = current.feelsLike.roundToInt()
+                city.description = current.weather[0].description
                 city.updateDateInfo()
+
+                city.hourly =  hourly
+                city.daily = daily
             }
 
             binding.apply {
                 textviewTemp.text = city.temp.toString()
                 textviewFeelsLikeTemp.text = city.feelsLikeLine()
                 textviewDate.text = city.lastUpd
-
+                textviewDescription.text = city.description.capitalize()
             }
 
-            val exampleList = generateDummyList(40)
-            recycler_view_weather.adapter = WeatherAdapter(exampleList)
+            recycler_view_weather.adapter = WeatherAdapter(city.hourly)
             recycler_view_weather.setHasFixedSize(true)
         })
-    }
-
-    private fun generateDummyList(size: Int): List<City> {
-        val list = ArrayList<City>()
-        for (i in 0 until size) {
-            val item = City("Moscow", 55.75, 37.61)
-            list += item
-        }
-        return list
     }
 
     override fun onDestroyView() {

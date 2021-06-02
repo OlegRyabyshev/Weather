@@ -9,5 +9,5 @@
     <string name="list_of_cities">Available locations</string>
     <string name="tab_monthly">This Month</string>
     <string name="tab_daily">This Week</string>
-    <string name="tab_hourly">24 Hours</string>
+    <string name="tab_hourly">Today</string>
 </resources>
