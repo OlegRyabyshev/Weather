@@ -9,8 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.weather_item.view.*
 import xyz.fcr.weather.R
-import xyz.fcr.weather.api.dto.Hourly
 import xyz.fcr.weather.fragments.WeatherAdapter.*
+import xyz.fcr.weather.objects.Hourly
 import kotlin.math.roundToInt
 
 class WeatherAdapter(private val hourlyList: List<Hourly>) :

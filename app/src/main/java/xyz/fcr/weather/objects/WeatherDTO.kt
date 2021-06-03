@@ -1,5 +1,4 @@
-package xyz.fcr.weather.api.dto
-
+package xyz.fcr.weather.objects
 
 import com.google.gson.annotations.SerializedName
 
@@ -19,8 +18,6 @@ data class Hourly(
     val clouds: Int,
     @SerializedName("dt")
     val dt: Int,
-    @SerializedName("rain")
-    val rain: Double,
     @SerializedName("temp")
     val temp: Double,
     @SerializedName("weather")
@@ -32,8 +29,6 @@ data class Daily(
     val clouds: Int,
     @SerializedName("dt")
     val dt: Int,
-    @SerializedName("rain")
-    val rain: Double,
     @SerializedName("temp")
     val temp: Temp,
     @SerializedName("weather")

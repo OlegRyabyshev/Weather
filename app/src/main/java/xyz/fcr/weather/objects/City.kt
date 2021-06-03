@@ -1,8 +1,6 @@
 package xyz.fcr.weather.objects
 
 import android.annotation.SuppressLint
-import xyz.fcr.weather.api.dto.Daily
-import xyz.fcr.weather.api.dto.Hourly
 import java.text.SimpleDateFormat
 import java.util.*
 

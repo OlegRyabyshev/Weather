@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.cities_fragment.*
 import xyz.fcr.weather.databinding.CitiesFragmentBinding
-import xyz.fcr.weather.objects.City
 import xyz.fcr.weather.objects.CityList
 
 class CitiesFragment : Fragment() {
