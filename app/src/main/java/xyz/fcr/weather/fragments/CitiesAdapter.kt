@@ -31,12 +31,13 @@ class CitiesAdapter(
         holder.tvCityName.text = currentItem.name
 
         holder.itemView.setOnClickListener {
-            val bundle = Bundle().putParcelable("current_city", exampleList[position])
-            var weatherFragment = WeatherFragment()
-            weatherFragment.setArguments(bundle);
+            val bundle = Bundle()
+            bundle.putParcelable("current_city", exampleList[position])
+
+            val weatherFragment = WeatherFragment()
+            weatherFragment.arguments = bundle
 
             val manager = activityCities?.supportFragmentManager
-
             if (manager != null) {
                 manager
                     .popBackStack()
@@ -46,10 +47,7 @@ class CitiesAdapter(
                     .replace(R.id.container, weatherFragment)
                     .commit()
             }
-
-
         }
-
     }
 
     override fun getItemCount() = exampleList.size
