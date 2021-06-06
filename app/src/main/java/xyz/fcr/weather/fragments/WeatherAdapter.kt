@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.weather_item.view.*
 import xyz.fcr.weather.R
 import xyz.fcr.weather.fragments.WeatherAdapter.*
@@ -22,11 +23,15 @@ class WeatherAdapter(private val hourlyList: List<Hourly>) :
     }
 
     override fun onBindViewHolder(holder: WeatherViewHolder, position: Int) {
-            val currentItem = hourlyList[position]
+        val currentItem = hourlyList[position]
 
-            holder.textViewTime.text = unixToTime(currentItem.dt)
-            holder.textViewTemp.text = currentItem.temp.roundToInt().toString()
-            holder.imageViewWeather
+        holder.textViewTime.text = unixToTime(currentItem.dt)
+        holder.textViewTemp.text = currentItem.temp.roundToInt().toString()
+
+        Glide
+            .with(holder.imageViewWeather.context)
+            .load("https://openweathermap.org/img/wn/${currentItem.weather[0].icon}@2x.png")
+            .into(holder.imageViewWeather)
     }
 
     @SuppressLint("SimpleDateFormat")

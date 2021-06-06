@@ -9,7 +9,7 @@ import android.widget.Toast
 class ConnectionBroadcastReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
 
-        if (ConnectivityManager.CONNECTIVITY_ACTION == intent?.action) {
+        if (ConnectivityManager.EXTRA_NO_CONNECTIVITY == intent?.action) {
             Toast.makeText(context,"Change in connection", Toast.LENGTH_SHORT).show()
         }
     }

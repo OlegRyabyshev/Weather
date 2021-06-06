@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.cities_fragment.*
 import xyz.fcr.weather.databinding.CitiesFragmentBinding
 import xyz.fcr.weather.objects.CityList
 
-class CitiesFragment : Fragment() {
+class CitiesFragment : Fragment(){
     private var _binding: CitiesFragmentBinding? = null
     private val binding get() = _binding!!
 
@@ -26,7 +26,7 @@ class CitiesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recycler_view_cities.adapter = CitiesAdapter(CityList().list)
+        recycler_view_cities.adapter = CitiesAdapter(CityList().list, activity)
         //recycler_view_weather.layoutManager = LinearLayoutManager(context)
         recycler_view_cities.setHasFixedSize(true)
     }

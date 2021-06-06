@@ -1,14 +1,17 @@
 package xyz.fcr.weather.objects
 
 import android.annotation.SuppressLint
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 import java.text.SimpleDateFormat
 import java.util.*
 
+@Parcelize
 data class City(
     val name: String,
     val lat: Double,
     val lon: Double
-) {
+) : Parcelable {
     var temp: Int = 0
     var maxTemp: Int = 0
     var lowTemp: Int = 0
@@ -17,6 +20,7 @@ data class City(
     var hourly: List<Hourly>? = null
     var daily: List<Daily>? = null
     var lastUpd: String = ""
+    var icon: String = ""
 
     fun feelsLikeLine(): String {
         return "$maxTemp°/$lowTemp° Feels like $feelsLikeTemp°"

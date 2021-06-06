@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.weather_fragment.*
 import xyz.fcr.weather.R
 import xyz.fcr.weather.api.WeatherLiveData
@@ -35,7 +36,11 @@ class WeatherFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val city = City("Moscow", 55.75, 37.61)
+        var city = City("Moscow", 55.75, 37.61)
+
+        if (savedInstanceState?.containsKey("current_city") == true) {
+            city = savedInstanceState.getParcelable("current_city")!!
+        }
 
         binding.textviewCity.setOnClickListener {
             val citiesFragment = CitiesFragment()
@@ -59,9 +64,10 @@ class WeatherFragment : Fragment() {
                 city.maxTemp = daily[0].temp.max.roundToInt()
                 city.feelsLikeTemp = current.feelsLike.roundToInt()
                 city.description = current.weather[0].description
+                city.icon = current.weather[0].icon
                 city.updateDateInfo()
 
-                city.hourly =  hourly
+                city.hourly = hourly
                 city.daily = daily
             }
 
@@ -70,6 +76,12 @@ class WeatherFragment : Fragment() {
                 textviewFeelsLikeTemp.text = city.feelsLikeLine()
                 textviewDate.text = city.lastUpd
                 textviewDescription.text = city.description.capitalize()
+
+                Glide
+                    .with(requireContext())
+                    .load("https://openweathermap.org/img/wn/${city.icon}@2x.png")
+                    .into(weatherImage)
+
             }
 
             if (city.hourly != null) {
