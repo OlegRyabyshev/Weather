@@ -1,20 +1,22 @@
 package xyz.fcr.weather.fragments
 
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.weather_fragment.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import xyz.fcr.weather.R
 import xyz.fcr.weather.api.WeatherLiveData
-import xyz.fcr.weather.api.WeatherLoader
+import xyz.fcr.weather.api.RemoteDataSource
 import xyz.fcr.weather.databinding.WeatherFragmentBinding
 import xyz.fcr.weather.objects.City
+import xyz.fcr.weather.objects.WeatherDTO
 import kotlin.math.roundToInt
 
 
@@ -22,6 +24,7 @@ class WeatherFragment : Fragment() {
     private var _binding: WeatherFragmentBinding? = null
     private val binding get() = _binding!!
     private val weatherLiveData = WeatherLiveData()
+    private val remoteDataSource = RemoteDataSource()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,7 +35,7 @@ class WeatherFragment : Fragment() {
         return binding.root
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -53,9 +56,28 @@ class WeatherFragment : Fragment() {
                 ?.commit()
         }
 
-        WeatherLoader().loadWeather(city.lat, city.lon, weatherLiveData)
+        //WeatherLoader().loadWeather(city.lat, city.lon, weatherLiveData)
 
-        weatherLiveData.observe(this, Observer {
+        val callBack = object :
+            Callback<WeatherDTO> {
+
+            override fun onResponse(call: Call<WeatherDTO>, response: Response<WeatherDTO>) {
+                val serverResponse: WeatherDTO? = response.body()
+                weatherLiveData.postValue(serverResponse)
+            }
+
+            override fun onFailure(call: Call<WeatherDTO>, t: Throwable) {
+                Toast.makeText(
+                    context,
+                    "Can't access weather server \nCheck internet connection",
+                    Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+
+        remoteDataSource.getWeatherDetails(city.lat, city.lon, callBack)
+
+        weatherLiveData.observe(this, {
 
             //Copying info from API to City object
             it?.apply {
@@ -75,7 +97,9 @@ class WeatherFragment : Fragment() {
                 textviewTemp.text = city.temp.toString()
                 textviewFeelsLikeTemp.text = city.feelsLikeLine()
                 textviewDate.text = city.lastUpd
-                textviewDescription.text = city.description.capitalize()
+                textviewDescription.text = city.description.replaceFirstChar { char ->
+                    char.uppercaseChar()
+                }
 
                 Glide
                     .with(requireContext())

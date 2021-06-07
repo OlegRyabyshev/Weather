@@ -1,13 +1,11 @@
 package xyz.fcr.weather
 
-import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import xyz.fcr.weather.broadcast.ConnectionBroadcastReceiver
 import xyz.fcr.weather.fragments.WeatherFragment
-
 
 class MainActivity : AppCompatActivity() {
 

@@ -14,11 +14,14 @@ import xyz.fcr.weather.fragments.WeatherAdapter.*
 import xyz.fcr.weather.objects.Hourly
 import kotlin.math.roundToInt
 
+const val MAX_ITEMS_SHOWN : Int = 25
+
 class WeatherAdapter(private val hourlyList: List<Hourly>) :
     RecyclerView.Adapter<WeatherViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherViewHolder {
-        val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.weather_item, parent, false)
+        val itemView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.weather_item, parent, false)
+
         return WeatherViewHolder(itemView)
     }
 
@@ -47,7 +50,8 @@ class WeatherAdapter(private val hourlyList: List<Hourly>) :
         val imageViewWeather: ImageView = itemView.rv_weather_image
     }
 
-    override fun getItemCount() = hourlyList.size
-
-
+    override fun getItemCount() : Int {
+        return if (hourlyList.size > MAX_ITEMS_SHOWN) MAX_ITEMS_SHOWN
+        else hourlyList.size
+    }
 }
