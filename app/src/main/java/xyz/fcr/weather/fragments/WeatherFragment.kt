@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.weather_fragment.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,6 +16,7 @@ import xyz.fcr.weather.R
 import xyz.fcr.weather.api.WeatherLiveData
 import xyz.fcr.weather.api.RemoteDataSource
 import xyz.fcr.weather.databinding.WeatherFragmentBinding
+import xyz.fcr.weather.datastore.CitySaver
 import xyz.fcr.weather.objects.City
 import xyz.fcr.weather.objects.WeatherDTO
 import kotlin.math.roundToInt
@@ -39,11 +41,7 @@ class WeatherFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var city = City("Moscow", 55.75, 37.61)
-
-        if (savedInstanceState?.containsKey("current_city") == true) {
-            city = savedInstanceState.getParcelable("current_city")!!
-        }
+        val city = CitySaver().getFromSharedPref(requireContext())
 
         binding.textviewCity.setOnClickListener {
             val citiesFragment = CitiesFragment()
@@ -94,6 +92,7 @@ class WeatherFragment : Fragment() {
             }
 
             binding.apply {
+                textviewCity.text = city.name
                 textviewTemp.text = city.temp.toString()
                 textviewFeelsLikeTemp.text = city.feelsLikeLine()
                 textviewDate.text = city.lastUpd
@@ -104,8 +103,8 @@ class WeatherFragment : Fragment() {
                 Glide
                     .with(requireContext())
                     .load("https://openweathermap.org/img/wn/${city.icon}@2x.png")
+                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                     .into(weatherImage)
-
             }
 
             if (city.hourly != null) {

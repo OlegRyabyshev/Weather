@@ -27,7 +27,6 @@ class CitiesFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
 
         recycler_view_cities.adapter = CitiesAdapter(CityList().list, activity)
-        //recycler_view_weather.layoutManager = LinearLayoutManager(context)
         recycler_view_cities.setHasFixedSize(true)
     }
 }
