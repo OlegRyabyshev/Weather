@@ -30,9 +30,8 @@ class CitiesAdapter(
         holder.tvCityName.text = currentItem.name
 
         holder.itemView.setOnClickListener {
-            val weatherFragment = WeatherFragment()
-
             val manager = activityCities?.supportFragmentManager
+
             if (manager != null) {
                 CitySaver().saveToSharedPref(currentItem, activityCities!!.applicationContext)
                 manager.popBackStack()

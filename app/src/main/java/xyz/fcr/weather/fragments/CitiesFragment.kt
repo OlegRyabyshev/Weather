@@ -26,6 +26,8 @@ class CitiesFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         recycler_view_cities.adapter = CitiesAdapter(CityList().list, activity)
         recycler_view_cities.setHasFixedSize(true)
     }

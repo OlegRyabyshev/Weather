@@ -16,7 +16,7 @@ class CityList {
             City("Washington", 38.90, -77.03),
             City("Kiev", 50.45, 30.52),
             City("Beijing", 39.90, 116.40),
-            City("Duduinka", 69.24, 86.11),
+            City("Duduinka", 69.24, 86.11)
         )
     }
 }
