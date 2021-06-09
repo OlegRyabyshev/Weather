@@ -54,8 +54,6 @@ class WeatherFragment : Fragment() {
                 ?.commit()
         }
 
-        //WeatherLoader().loadWeather(city.lat, city.lon, weatherLiveData)
-
         val callBack = object :
             Callback<WeatherDTO> {
 
@@ -75,47 +73,49 @@ class WeatherFragment : Fragment() {
 
         remoteDataSource.getWeatherDetails(city.lat, city.lon, callBack)
 
-        weatherLiveData.observe(this, {
-
-            //Copying info from API to City object
-            it?.apply {
-                city.temp = current.temp.roundToInt()
-                city.lowTemp = daily[0].temp.min.roundToInt()
-                city.maxTemp = daily[0].temp.max.roundToInt()
-                city.feelsLikeTemp = current.feelsLike.roundToInt()
-                city.description = current.weather[0].description
-                city.icon = current.weather[0].icon
-                city.updateDateInfo()
-
-                city.hourly = hourly
-                city.daily = daily
-            }
-
-            binding.apply {
-                textviewCity.text = city.name
-                textviewTemp.text = city.temp.toString()
-                textviewFeelsLikeTemp.text = city.feelsLikeLine()
-                textviewDate.text = city.lastUpd
-                textviewDescription.text = city.description.replaceFirstChar { char ->
-                    char.uppercaseChar()
-                }
-
-                Glide
-                    .with(requireContext())
-                    .load("https://openweathermap.org/img/wn/${city.icon}@2x.png")
-                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                    .into(weatherImage)
-            }
-
-            if (city.hourly != null) {
-                recycler_view_weather.adapter = WeatherAdapter(city.hourly!!)
-                recycler_view_weather.setHasFixedSize(true)
-            }
+        weatherLiveData.observe(viewLifecycleOwner, {
+            loadWeatherUI(it, city)
         })
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun loadWeatherUI(weatherDTO: WeatherDTO?, city: City) {
+        weatherDTO?.apply {
+            city.temp = current.temp.roundToInt()
+            city.lowTemp = daily[0].temp.min.roundToInt()
+            city.maxTemp = daily[0].temp.max.roundToInt()
+            city.feelsLikeTemp = current.feelsLike.roundToInt()
+            city.description = current.weather[0].description
+            city.icon = current.weather[0].icon
+            city.updateDateInfo()
+
+            city.hourly = hourly
+            city.daily = daily
+        }
+
+        binding.apply {
+            textviewCity.text = city.name
+            textviewTemp.text = city.temp.toString()
+            textviewFeelsLikeTemp.text = city.feelsLikeLine()
+            textviewDate.text = city.lastUpd
+            textviewDescription.text = city.description.replaceFirstChar { char ->
+                char.uppercaseChar()
+            }
+
+            Glide
+                .with(requireContext())
+                .load("https://openweathermap.org/img/wn/${city.icon}@2x.png")
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                .into(weatherImage)
+        }
+
+        if (city.hourly != null) {
+            recycler_view_weather.adapter = WeatherAdapter(city.hourly!!)
+            recycler_view_weather.setHasFixedSize(true)
+        }
     }
 }

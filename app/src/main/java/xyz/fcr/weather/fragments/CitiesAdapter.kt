@@ -35,14 +35,7 @@ class CitiesAdapter(
             val manager = activityCities?.supportFragmentManager
             if (manager != null) {
                 CitySaver().saveToSharedPref(currentItem, activityCities!!.applicationContext)
-
-                manager
-                    .popBackStack()
-
-                manager
-                    .beginTransaction()
-                    .replace(R.id.container, weatherFragment)
-                    .commit()
+                manager.popBackStack()
             }
         }
     }
