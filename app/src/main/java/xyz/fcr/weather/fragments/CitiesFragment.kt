@@ -10,6 +10,7 @@ import xyz.fcr.weather.App
 import xyz.fcr.weather.databinding.CitiesFragmentBinding
 import xyz.fcr.weather.datastore.room.convertToCityList
 import xyz.fcr.weather.datastore.room.convertToEntityList
+import xyz.fcr.weather.fragments.adapters.CitiesAdapter
 import xyz.fcr.weather.objects.City
 import xyz.fcr.weather.objects.CityList
 

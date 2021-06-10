@@ -17,6 +17,8 @@ import xyz.fcr.weather.api.WeatherLiveData
 import xyz.fcr.weather.api.RemoteDataSource
 import xyz.fcr.weather.databinding.WeatherFragmentBinding
 import xyz.fcr.weather.datastore.CitySaver
+import xyz.fcr.weather.fragments.adapters.DailyAdapter
+import xyz.fcr.weather.fragments.adapters.HourlyAdapter
 import xyz.fcr.weather.objects.City
 import xyz.fcr.weather.objects.WeatherDTO
 import kotlin.math.roundToInt
@@ -113,7 +115,8 @@ class WeatherFragment : Fragment() {
         }
 
         if (city.hourly != null) {
-            recycler_view_weather.adapter = WeatherAdapter(city.hourly!!)
+            //recycler_view_weather.adapter = HourlyAdapter(city.hourly!!)
+                recycler_view_weather.adapter = DailyAdapter(city.daily!!)
             recycler_view_weather.setHasFixedSize(true)
         }
     }

@@ -1,4 +1,4 @@
-package xyz.fcr.weather.fragments
+package xyz.fcr.weather.fragments.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -10,22 +10,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.weather_item.view.*
 import xyz.fcr.weather.R
-import xyz.fcr.weather.fragments.WeatherAdapter.*
 import xyz.fcr.weather.objects.Hourly
 import kotlin.math.roundToInt
 
 const val MAX_ITEMS_SHOWN : Int = 25
 
-class WeatherAdapter(private val hourlyList: List<Hourly>) :
-    RecyclerView.Adapter<WeatherViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherViewHolder {
+class HourlyAdapter(private val hourlyList: List<Hourly>) :
+    RecyclerView.Adapter<HourlyAdapter.HourlyViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HourlyViewHolder {
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.weather_item, parent, false)
 
-        return WeatherViewHolder(itemView)
+        return HourlyViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: WeatherViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: HourlyViewHolder, position: Int) {
         val currentItem = hourlyList[position]
 
         holder.textViewTime.text = unixToTime(currentItem.dt)
@@ -44,7 +43,7 @@ class WeatherAdapter(private val hourlyList: List<Hourly>) :
         return simpleDF.format(date)
     }
 
-    class WeatherViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class HourlyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textViewTime: TextView = itemView.rv_weather_time
         val textViewTemp: TextView = itemView.rv_weather_temp
         val imageViewWeather: ImageView = itemView.rv_weather_image
