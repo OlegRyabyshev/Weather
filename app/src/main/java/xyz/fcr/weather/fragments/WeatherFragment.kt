@@ -21,7 +21,6 @@ import xyz.fcr.weather.objects.City
 import xyz.fcr.weather.objects.WeatherDTO
 import kotlin.math.roundToInt
 
-
 class WeatherFragment : Fragment() {
     private var _binding: WeatherFragmentBinding? = null
     private val binding get() = _binding!!

@@ -20,8 +20,9 @@ class CitiesAdapter(
     RecyclerView.Adapter<WeatherViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherViewHolder {
-        val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.cities_item, parent, false)
+        val itemView = LayoutInflater.from(parent.context)
+                .inflate(R.layout.cities_item, parent, false)
+
         return WeatherViewHolder(itemView)
     }
 

@@ -13,7 +13,6 @@ class App : Application() {
     }
 
     companion object {
-
         private var appInstance: App? = null
         private var db: CityDatabase? = null
         private const val DB_NAME = "City.db"

@@ -7,14 +7,17 @@ import xyz.fcr.weather.objects.City
 @Dao
 interface CityDao {
     @Query("SELECT * FROM cities")
-    fun getListOfCities() : List<City>
+    fun getListOfCities() : List<CityEntity>
 
     @Update
-    fun updateCity(city: City)
+    fun updateCity(entity: CityEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addCity(city: City)
+    fun addCity(entity: CityEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun addListCity(listCity: List<CityEntity>)
 
     @Delete
-    fun deleteCity(city: City)
+    fun deleteCity(entity: CityEntity)
 }

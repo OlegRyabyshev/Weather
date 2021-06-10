@@ -6,13 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.cities_fragment.*
+import xyz.fcr.weather.App
 import xyz.fcr.weather.databinding.CitiesFragmentBinding
+import xyz.fcr.weather.datastore.room.convertToCityList
+import xyz.fcr.weather.datastore.room.convertToEntityList
+import xyz.fcr.weather.objects.City
 import xyz.fcr.weather.objects.CityList
 
 class CitiesFragment : Fragment(){
     private var _binding: CitiesFragmentBinding? = null
     private val binding get() = _binding!!
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,9 +29,19 @@ class CitiesFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
-        recycler_view_cities.adapter = CitiesAdapter(CityList().list, activity)
+        recycler_view_cities.adapter = CitiesAdapter(loadListOfCities(), activity)
         recycler_view_cities.setHasFixedSize(true)
+    }
+
+    private fun loadListOfCities(): List<City> {
+        val cityDB = App.getHistoryDao()
+        var list = convertToCityList(cityDB.getListOfCities())
+
+        if (list.isEmpty()) {
+            cityDB.addListCity(convertToEntityList(CityList().list))
+            list = convertToCityList(cityDB.getListOfCities())
+        }
+
+        return list
     }
 }

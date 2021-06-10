@@ -2,7 +2,6 @@ package xyz.fcr.weather.objects
 
 import android.annotation.SuppressLint
 import android.os.Parcelable
-import androidx.room.Entity
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.parcel.RawValue
 import java.text.SimpleDateFormat

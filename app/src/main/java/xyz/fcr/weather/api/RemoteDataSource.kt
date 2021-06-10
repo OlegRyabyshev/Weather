@@ -4,7 +4,6 @@ import com.google.gson.GsonBuilder
 import retrofit2.Callback
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import xyz.fcr.weather.api.retrofit.WeatherAPI
 import xyz.fcr.weather.objects.WeatherDTO
 
 class RemoteDataSource {

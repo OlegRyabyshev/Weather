@@ -1,4 +1,4 @@
-package xyz.fcr.weather.api.retrofit
+package xyz.fcr.weather.api
 
 import retrofit2.Call
 import retrofit2.http.GET
