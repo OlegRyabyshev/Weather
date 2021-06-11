@@ -118,7 +118,7 @@ class WeatherFragment : Fragment() {
             weatherImage.setImageResource(loadPicture(city.icon, false))
         }
 
-        //fillHourlyAdapter(city)
+        fillHourlyAdapter(city)
 
 
         //recycler_view_weather.adapter = HourlyAdapter(city.hourly!!)
