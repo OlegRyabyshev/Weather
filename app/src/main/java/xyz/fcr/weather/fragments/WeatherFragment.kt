@@ -19,6 +19,7 @@ import xyz.fcr.weather.databinding.WeatherFragmentBinding
 import xyz.fcr.weather.datastore.CitySaver
 import xyz.fcr.weather.fragments.adapters.DailyAdapter
 import xyz.fcr.weather.fragments.adapters.HourlyAdapter
+import xyz.fcr.weather.fragments.adapters.loadPicture
 import xyz.fcr.weather.objects.City
 import xyz.fcr.weather.objects.WeatherDTO
 import kotlin.math.roundToInt
@@ -107,11 +108,7 @@ class WeatherFragment : Fragment() {
                 char.uppercaseChar()
             }
 
-            Glide
-                .with(requireContext())
-                .load("https://openweathermap.org/img/wn/${city.icon}@2x.png")
-                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                .into(weatherImage)
+            weatherImage.setImageResource(loadPicture(city.icon, false))
         }
 
         if (city.hourly != null) {

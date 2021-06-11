@@ -1,13 +1,12 @@
 <resources>
     <string name="app_name">Weather</string>
-    <string name="city">Moscow</string>
-    <string name="date_time">Fri, 31 July 5:40 pm</string>
-    <string name="temp">27</string>
+    <string name="city">City</string>
+    <string name="date_time">Mon, 1 Jan 0:00 pm</string>
+    <string name="temp">0</string>
     <string name="temp_type">°</string>
-    <string name="high_low_feels_like">27°/21° Feels like 29°</string>
-    <string name="weather_status">Mostly Cloudy</string>
+    <string name="high_low_feels_like">0°/0° Feels like 0°</string>
+    <string name="weather_status">Not available</string>
     <string name="list_of_cities">Available locations</string>
-    <string name="tab_monthly">This Month</string>
-    <string name="tab_daily">This Week</string>
+    <string name="tab_daily">This week</string>
     <string name="tab_hourly">Today</string>
 </resources>

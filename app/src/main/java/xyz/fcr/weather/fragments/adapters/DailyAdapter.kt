@@ -1,13 +1,13 @@
 package xyz.fcr.weather.fragments.adapters
 
 import android.annotation.SuppressLint
+import android.graphics.PorterDuff
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.weather_item.view.*
 import xyz.fcr.weather.R
 import xyz.fcr.weather.objects.Daily
@@ -24,14 +24,12 @@ class DailyAdapter(private val dailyList: List<Daily>) :
 
     override fun onBindViewHolder(holder: DailyViewHolder, position: Int) {
         val currentItem = dailyList[position]
+        val temperature = currentItem.temp.max.roundToInt().toString() + "°"
 
         holder.textViewTime.text = toDate(currentItem.dt)
-        holder.textViewTemp.text = currentItem.temp.max.roundToInt().toString()
-
-        Glide
-            .with(holder.imageViewWeather.context)
-            .load("https://openweathermap.org/img/wn/${currentItem.weather[0].icon}@2x.png")
-            .into(holder.imageViewWeather)
+        holder.textViewTemp.text = temperature
+        holder.imageViewWeather.setImageResource(
+            loadPicture(currentItem.weather[0].icon, true))
     }
 
     @SuppressLint("SimpleDateFormat")
