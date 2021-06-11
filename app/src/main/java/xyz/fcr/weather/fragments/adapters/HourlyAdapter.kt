@@ -25,9 +25,10 @@ class HourlyAdapter(private val hourlyList: List<Hourly>) :
 
     override fun onBindViewHolder(holder: HourlyViewHolder, position: Int) {
         val currentItem = hourlyList[position]
+        val temperature = currentItem.temp.roundToInt().toString() + "°"
 
         holder.textViewTime.text = unixToTime(currentItem.dt)
-        holder.textViewTemp.text = currentItem.temp.roundToInt().toString()
+        holder.textViewTemp.text = temperature
         holder.imageViewWeather.setImageResource(loadPicture(currentItem.weather[0].icon, true))
     }
 

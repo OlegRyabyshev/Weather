@@ -6,15 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.weather_fragment.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import xyz.fcr.weather.R
-import xyz.fcr.weather.api.WeatherLiveData
 import xyz.fcr.weather.api.RemoteDataSource
+import xyz.fcr.weather.api.WeatherLiveData
 import xyz.fcr.weather.databinding.WeatherFragmentBinding
 import xyz.fcr.weather.datastore.CitySaver
 import xyz.fcr.weather.fragments.adapters.DailyAdapter
@@ -68,7 +66,8 @@ class WeatherFragment : Fragment() {
                 Toast.makeText(
                     context,
                     "Can't access weather server \nCheck internet connection",
-                    Toast.LENGTH_SHORT)
+                    Toast.LENGTH_SHORT
+                )
                     .show()
             }
         }
@@ -78,6 +77,14 @@ class WeatherFragment : Fragment() {
         weatherLiveData.observe(viewLifecycleOwner, {
             loadWeatherUI(it, city)
         })
+
+        //binding.todayTab.setOnClickListener {
+        //    fillHourlyAdapter(city)
+        //}
+
+        //binding.dailyTab.setOnClickListener {
+        //    fillDailyAdapter(city)
+        //}
     }
 
     override fun onDestroyView() {
@@ -111,10 +118,21 @@ class WeatherFragment : Fragment() {
             weatherImage.setImageResource(loadPicture(city.icon, false))
         }
 
-        if (city.hourly != null) {
-            //recycler_view_weather.adapter = HourlyAdapter(city.hourly!!)
-                recycler_view_weather.adapter = DailyAdapter(city.daily!!)
-            recycler_view_weather.setHasFixedSize(true)
-        }
+        //fillHourlyAdapter(city)
+
+
+        //recycler_view_weather.adapter = HourlyAdapter(city.hourly!!)
+
+        //recycler_view_weather.adapter = DailyAdapter(city.daily!!)
+            //recycler_view_weather.setHasFixedSize(true)
+
+    }
+
+    private fun fillHourlyAdapter(city: City) {
+        recycler_view_weather.adapter = HourlyAdapter(city.hourly!!)
+    }
+
+    private fun fillDailyAdapter(city: City) {
+        recycler_view_weather.adapter = DailyAdapter(city.daily!!)
     }
 }
