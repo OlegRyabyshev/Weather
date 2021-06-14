@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.weather_fragment.*
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -15,9 +17,7 @@ import xyz.fcr.weather.api.RemoteDataSource
 import xyz.fcr.weather.api.WeatherLiveData
 import xyz.fcr.weather.databinding.WeatherFragmentBinding
 import xyz.fcr.weather.datastore.CitySaver
-import xyz.fcr.weather.fragments.adapters.DailyAdapter
-import xyz.fcr.weather.fragments.adapters.HourlyAdapter
-import xyz.fcr.weather.fragments.adapters.loadPicture
+import xyz.fcr.weather.fragments.adapters.*
 import xyz.fcr.weather.objects.City
 import xyz.fcr.weather.objects.WeatherDTO
 import kotlin.math.roundToInt
@@ -25,8 +25,13 @@ import kotlin.math.roundToInt
 class WeatherFragment : Fragment() {
     private var _binding: WeatherFragmentBinding? = null
     private val binding get() = _binding!!
+
     private val weatherLiveData = WeatherLiveData()
     private val remoteDataSource = RemoteDataSource()
+
+    private lateinit var tabLayout: TabLayout
+    private lateinit var pager2: ViewPager2
+    private lateinit var adapter: ViewPagerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -76,15 +81,8 @@ class WeatherFragment : Fragment() {
 
         weatherLiveData.observe(viewLifecycleOwner, {
             loadWeatherUI(it, city)
+            CitySaver().saveToSharedPref(city, requireContext())
         })
-
-        //binding.todayTab.setOnClickListener {
-        //    fillHourlyAdapter(city)
-        //}
-
-        //binding.dailyTab.setOnClickListener {
-        //    fillDailyAdapter(city)
-        //}
     }
 
     override fun onDestroyView() {
@@ -118,21 +116,23 @@ class WeatherFragment : Fragment() {
             weatherImage.setImageResource(loadPicture(city.icon, false))
         }
 
-        fillHourlyAdapter(city)
+        tabLayout = binding.tabLayout
+        pager2 = binding.viewPager2
 
+        adapter = ViewPagerAdapter(childFragmentManager, lifecycle)
+        pager2.adapter = adapter
 
-        //recycler_view_weather.adapter = HourlyAdapter(city.hourly!!)
+        TabLayoutMediator(tabLayout, pager2) { tab, position ->
+            when (position) {
+                0 -> {
+                    tab.text = "Today"
+                }
+                1 -> {
+                    tab.text = "This week"
+                }
+            }
+        }.attach()
 
-        //recycler_view_weather.adapter = DailyAdapter(city.daily!!)
-            //recycler_view_weather.setHasFixedSize(true)
-
-    }
-
-    private fun fillHourlyAdapter(city: City) {
-        recycler_view_weather.adapter = HourlyAdapter(city.hourly!!)
-    }
-
-    private fun fillDailyAdapter(city: City) {
-        recycler_view_weather.adapter = DailyAdapter(city.daily!!)
+        pager2.isUserInputEnabled = false
     }
 }

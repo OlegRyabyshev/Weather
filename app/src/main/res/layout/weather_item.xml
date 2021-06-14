@@ -17,7 +17,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/poppins_light"
             android:gravity="center"
-            android:text="00:00"
+            android:text="@string/filler_time"
             android:textColor="@color/black"
             android:textSize="15sp" />
 
@@ -28,7 +28,7 @@
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:src="@drawable/ic_na"
+            android:src="@drawable/ic_na_dark"
             tools:ignore="ContentDescription" />
 
         <TextView
@@ -38,7 +38,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/poppins_light"
             android:gravity="center"
-            android:text="0°"
+            android:text="@string/filler_temperature"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
