@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -27,6 +28,7 @@ class CitiesFragment : Fragment() {
     private lateinit var fabAdd: FloatingActionButton
     private lateinit var fabAddCity: ExtendedFloatingActionButton
     private lateinit var fabAddLocation: ExtendedFloatingActionButton
+    private lateinit var backButton: ImageView
 
     private val rotateOpen: Animation by lazy {
         AnimationUtils.loadAnimation(context, R.anim.rotate_open_anim)
@@ -62,6 +64,7 @@ class CitiesFragment : Fragment() {
         fabAdd = binding.fabAdd
         fabAddCity = binding.fabAddCity
         fabAddLocation = binding.fabAddLocation
+        backButton = binding.backButton
 
         fabAdd.setOnClickListener {
             onButtonClicked()
@@ -75,7 +78,14 @@ class CitiesFragment : Fragment() {
             //checkPermission()
         }
 
+        backButton.setOnClickListener {
+            val manager = activity?.supportFragmentManager
+            manager?.popBackStack()
+        }
+
     }
+
+
 
     private fun onButtonClicked() {
 
