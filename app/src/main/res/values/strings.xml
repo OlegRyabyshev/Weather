@@ -10,7 +10,7 @@
     <string name="tab_daily">This week</string>
     <string name="tab_hourly">Today</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="city_name">Loading</string>
+    <string name="city_name">City name</string>
     <string name="filler_time">00:00</string>
     <string name="filler_temperature">0°</string>
     <string name="add_city">Add city</string>
@@ -22,10 +22,12 @@
     <string name="dialog_title_gps_turned_off">GPS отключён</string>
     <string name="dialog_message_last_location_unknown">Местонахождение неизвестно. Включите GPS, если хотите получить погоду по текущему адресу</string>
     <string name="dialog_message_last_known_location">Показана последняя известная локация. Включите GPS, если хотите обновить местонахождение</string>
-    <string name="dialog_rationale_title">Доступ к геолокации</string>
-    <string name="dialog_rationale_meaasge">Объяснение</string>
-    <string name="dialog_rationale_give_access">Предоставить доступ</string>
-    <string name="dialog_rationale_decline">Не надо</string>
+
+    <string name="dialog_rationale_title">Location request</string>
+    <string name="dialog_rationale_meaasge">This app requests your location in order to add a new city in list based on your current position</string>
+    <string name="dialog_rationale_give_access">Give permission</string>
+    <string name="dialog_rationale_decline">Not now</string>
+
     <string name="dialog_address_title">Ваш адрес</string>
     <string name="dialog_address_get_weather">Узнать погоду</string>
 </resources>
