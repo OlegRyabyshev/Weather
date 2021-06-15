@@ -23,7 +23,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import xyz.fcr.weather.App
 import xyz.fcr.weather.R
 import xyz.fcr.weather.databinding.CitiesFragmentBinding
-import xyz.fcr.weather.datastore.room.convertToCity
 import xyz.fcr.weather.datastore.room.convertToCityList
 import xyz.fcr.weather.datastore.room.convertToEntity
 import xyz.fcr.weather.datastore.room.convertToEntityList
@@ -76,7 +75,8 @@ class CitiesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.recyclerViewCities.adapter = CitiesAdapter(loadListOfCities(), activity)
+        updateAdapter()
+
         binding.recyclerViewCities.setHasFixedSize(true)
 
         fabAdd = binding.fabAdd
@@ -101,6 +101,22 @@ class CitiesFragment : Fragment() {
             manager?.popBackStack()
         }
 
+    }
+
+    private fun updateAdapter() {
+        binding.recyclerViewCities.adapter = CitiesAdapter(loadListOfCities(), activity)
+        (binding.recyclerViewCities.adapter as CitiesAdapter).notifyDataSetChanged()
+    }
+
+    private fun loadListOfCities(): List<City> {
+        var list = convertToCityList(cityDB.getListOfCities())
+
+        if (list.isEmpty()) {
+            cityDB.addListCity(convertToEntityList(CityList().list))
+            list = convertToCityList(cityDB.getListOfCities())
+        }
+
+        return list
     }
 
     private fun onButtonClicked() {
@@ -135,17 +151,6 @@ class CitiesFragment : Fragment() {
         }
 
         buttonClicked = !buttonClicked
-    }
-
-    private fun loadListOfCities(): List<City> {
-        var list = convertToCityList(cityDB.getListOfCities())
-
-        if (list.isEmpty()) {
-            cityDB.addListCity(convertToEntityList(CityList().list))
-            list = convertToCityList(cityDB.getListOfCities())
-        }
-
-        return list
     }
 
     private fun checkPermission() {
@@ -190,97 +195,29 @@ class CitiesFragment : Fragment() {
 
     private fun getLocation() {
 
-        if (ContextCompat.checkSelfPermission(requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
             val locationManager =
                 requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
-            var isGPSEnabled = false
-            var isNetworkEnabled = false
-
-            isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-            isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+            val isGPSEnabled =
+                locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
 
             if (isGPSEnabled) {
                 locationManager.requestLocationUpdates(
                     LocationManager.GPS_PROVIDER,
                     REFRESH_PERIOD,
                     MINIMAL_DISTANCE,
-
+                    onLocationListener
                 )
 
-                location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-
-                if (location != null) {
-                    latitude = location.getLatitude()
-                    longitude = location.getLongitude()
-                }
-            } else if (isNetworkEnabled)
-                locationManager.requestLocationUpdates(
-                    LocationManager.GPS_PROVIDER,
-                    MIN_TIME_BW_UPDATES,
-                    MIN_DISTANCE_CHANGE_FOR_UPDATES,
-                    this
-                )
-            Log.d(TAG, "GPS Enabled")
-            if (locationManager != null) {
-                location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                if (location != null) {
-                    latitude = location.getLatitude()
-                    longitude = location.getLongitude()
-                }
+            } else {
+                showRationaleDialog()
             }
         }
-    }
-
-    fun getLocatioan(): Location? {
-        try {
-            locationManager = mContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-
-            isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-            isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
-
-
-            this.canGetLocation = true
-            if (isNetworkEnabled) {
-                locationManager.requestLocationUpdates(
-                    LocationManager.NETWORK_PROVIDER,
-                    MIN_TIME_BW_UPDATES,
-                    MIN_DISTANCE_CHANGE_FOR_UPDATES,
-                    this
-                )
-                Log.d(TAG, "Network")
-                if (locationManager != null) {
-                    location =
-                        locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
-                    if (location != null) {
-                        latitude = location.getLatitude()
-                        longitude = location.getLongitude()
-                    }
-                }
-            }
-            // if GPS Enabled get lat/long using GPS Services
-            if (isGPSEnabled && location == null) {
-                locationManager.requestLocationUpdates(
-                    LocationManager.GPS_PROVIDER,
-                    MIN_TIME_BW_UPDATES,
-                    MIN_DISTANCE_CHANGE_FOR_UPDATES,
-                    this
-                )
-                Log.d(TAG, "GPS Enabled")
-                if (locationManager != null) {
-                    location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                    if (location != null) {
-                        latitude = location.getLatitude()
-                        longitude = location.getLongitude()
-                    }
-                }
-            }
-        } catch (e: Exception) {
-            Log.e(TAG, "Location Not Found")
-        }
-        return location
     }
 
     private val onLocationListener = object : LocationListener {
@@ -304,8 +241,11 @@ class CitiesFragment : Fragment() {
         Thread {
             try {
                 val addresses = geoCoder.getFromLocation(location.latitude, location.longitude, 1)
-                val city = City(addresses[0].getAddressLine(0), location.latitude, location.longitude)
+                val city = City(addresses[0].adminArea, location.latitude, location.longitude)
                 cityDB.addCity(convertToEntity(city))
+
+                requireActivity().runOnUiThread { updateAdapter() }
+
             } catch (e: IOException) {
                 e.printStackTrace()
             }

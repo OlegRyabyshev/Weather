@@ -1,8 +1,6 @@
 package xyz.fcr.weather.datastore.room
 
 import androidx.room.*
-import xyz.fcr.weather.objects.City
-
 
 @Dao
 interface CityDao {
