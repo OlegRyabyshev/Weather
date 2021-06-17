@@ -49,6 +49,17 @@ class WeatherFragment : Fragment() {
         val city = CitySaver().getFromSharedPref(requireContext())
 
         binding.textviewCity.setOnClickListener {
+            val mapFragment = MapsFragment()
+
+            val manager = activity?.supportFragmentManager
+            manager
+                ?.beginTransaction()
+                ?.replace(R.id.container, mapFragment)
+                ?.addToBackStack("")
+                ?.commit()
+        }
+
+        binding.buttonEditCity.setOnClickListener {
             val citiesFragment = CitiesFragment()
 
             val manager = activity?.supportFragmentManager

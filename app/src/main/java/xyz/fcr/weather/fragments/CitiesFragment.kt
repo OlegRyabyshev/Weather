@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -30,6 +31,7 @@ import xyz.fcr.weather.fragments.adapters.CitiesAdapter
 import xyz.fcr.weather.objects.City
 import xyz.fcr.weather.objects.CityList
 import java.io.IOException
+
 
 private const val REQUEST_CODE = 12345
 private const val REFRESH_PERIOD = 60000L
@@ -89,7 +91,7 @@ class CitiesFragment : Fragment() {
         }
 
         fabAddCity.setOnClickListener {
-            Toast.makeText(context, "In development", Toast.LENGTH_SHORT).show()
+            showAlertWithCityInput(requireContext())
         }
 
         fabAddLocation.setOnClickListener {
@@ -97,8 +99,7 @@ class CitiesFragment : Fragment() {
         }
 
         backButton.setOnClickListener {
-            val manager = activity?.supportFragmentManager
-            manager?.popBackStack()
+            activity?.supportFragmentManager?.popBackStack()
         }
 
     }
@@ -233,21 +234,80 @@ class CitiesFragment : Fragment() {
         override fun onProviderDisabled(provider: String) {}
     }
 
-    private fun getAddressAsync(
-        context: Context,
-        location: Location
-    ) {
+    private fun getAddressAsync(context: Context, location: Location) {
+
         val geoCoder = Geocoder(context)
         Thread {
             try {
-                val addresses = geoCoder.getFromLocation(location.latitude, location.longitude, 1)
-                val city = City(addresses[0].adminArea, location.latitude, location.longitude)
-                cityDB.addCity(convertToEntity(city))
+                val address =
+                    geoCoder.getFromLocation(location.latitude, location.longitude, 1)
+                val city =
+                    City(address[0].adminArea, location.latitude, location.longitude)
 
+                cityDB.addCity(convertToEntity(city))
                 requireActivity().runOnUiThread { updateAdapter() }
 
             } catch (e: IOException) {
-                e.printStackTrace()
+                requireActivity().runOnUiThread {
+                    Toast.makeText(
+                        requireContext(),
+                        "Error. Check your connection.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }.start()
+    }
+
+    private fun showAlertWithCityInput(context: Context) {
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Enter your city name")
+
+        val viewInflated: View = LayoutInflater.from(getContext())
+            .inflate(R.layout.add_city_alert, view as ViewGroup?, false)
+
+        val input = viewInflated.findViewById<View>(R.id.input) as EditText
+        builder.setView(viewInflated)
+
+        builder.setPositiveButton(android.R.string.ok) { dialog, _ ->
+            dialog.dismiss()
+            val cityInput = input.text.toString()
+            createNewCityAsync(context, cityInput)
+        }
+
+        builder.setNegativeButton(android.R.string.cancel) { dialog, which ->
+            dialog.cancel()
+        }
+
+        builder.show()
+    }
+
+    private fun createNewCityAsync(context: Context, cityString: String) {
+        val geoCoder = Geocoder(context)
+
+        Thread {
+            try {
+                val address = geoCoder.getFromLocationName(cityString, 1)
+                val city = City(cityString, address[0].latitude, address[0].longitude)
+                cityDB.addCity(convertToEntity(city))
+                requireActivity().runOnUiThread { updateAdapter() }
+
+            } catch (e: IOException) {
+                requireActivity().runOnUiThread {
+                    Toast.makeText(
+                        requireContext(),
+                        "Error. Check your connection.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            } catch (e: Exception) {
+                requireActivity().runOnUiThread {
+                    Toast.makeText(
+                        requireContext(),
+                        "Can't find this city",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }.start()
     }

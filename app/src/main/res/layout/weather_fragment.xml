@@ -31,12 +31,14 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:id="@+id/button_edit_city"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="10dp"
             android:src="@drawable/ic_edit"
-            app:layout_constraintBottom_toTopOf="@+id/textview_date"
-            app:layout_constraintStart_toEndOf="@+id/textview_city"
             app:layout_constraintTop_toTopOf="@+id/textview_city"
+            app:layout_constraintBottom_toBottomOf="@+id/textview_city"
+            app:layout_constraintStart_toEndOf="@+id/textview_city"
             tools:ignore="ContentDescription" />
 
         <TextView
