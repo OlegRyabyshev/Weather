@@ -20,13 +20,14 @@ import xyz.fcr.weather.objects.City
 class MapsFragment : Fragment() {
     private var _binding: MapsMainFragmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var city : City
+    private lateinit var city: City
 
     private val callback = OnMapReadyCallback { googleMap ->
-        val sydney = LatLng(-34.0, 151.0)
+        val city = CitySaver().getFromSharedPref(requireContext())
+        val cityLatLng = LatLng(city.lat, city.lon)
 
-        googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        googleMap.addMarker(MarkerOptions().position(cityLatLng).title("Marker in ${city.name}"))
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(cityLatLng))
 
     }
 
