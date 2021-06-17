@@ -20,7 +20,6 @@ import xyz.fcr.weather.objects.City
 class MapsFragment : Fragment() {
     private var _binding: MapsMainFragmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var city: City
 
     private val callback = OnMapReadyCallback { googleMap ->
         val city = CitySaver().getFromSharedPref(requireContext())
@@ -28,6 +27,7 @@ class MapsFragment : Fragment() {
 
         googleMap.addMarker(MarkerOptions().position(cityLatLng).title("Marker in ${city.name}"))
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(cityLatLng))
+        googleMap.setMinZoomPreference(9F)
 
     }
 

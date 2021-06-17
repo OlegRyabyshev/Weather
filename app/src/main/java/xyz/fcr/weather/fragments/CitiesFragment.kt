@@ -77,7 +77,7 @@ class CitiesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        updateAdapter()
+        binding.recyclerViewCities.adapter = CitiesAdapter(loadListOfCities(), activity)
 
         binding.recyclerViewCities.setHasFixedSize(true)
 
@@ -105,7 +105,6 @@ class CitiesFragment : Fragment() {
     }
 
     private fun updateAdapter() {
-        binding.recyclerViewCities.adapter = CitiesAdapter(loadListOfCities(), activity)
         (binding.recyclerViewCities.adapter as CitiesAdapter).notifyDataSetChanged()
     }
 
