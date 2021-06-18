@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "999208399377",
+    "project_id": "weather-a412a",
+    "storage_bucket": "weather-a412a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:999208399377:android:ff8ee64ade5b6c9edfb7b0",
+        "android_client_info": {
+          "package_name": "xyz.fcr.weather"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "999208399377-n781a186e2oivnteqka5bpu5eomimki8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASEX92YSfIzcyA6KD3gEQMBb8XpdYLQ-E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "999208399377-n781a186e2oivnteqka5bpu5eomimki8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

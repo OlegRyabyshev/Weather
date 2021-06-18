@@ -12,10 +12,10 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+
 import xyz.fcr.weather.R
 import xyz.fcr.weather.databinding.MapsMainFragmentBinding
 import xyz.fcr.weather.datastore.CitySaver
-import xyz.fcr.weather.objects.City
 
 class MapsFragment : Fragment() {
     private var _binding: MapsMainFragmentBinding? = null
@@ -28,7 +28,6 @@ class MapsFragment : Fragment() {
         googleMap.addMarker(MarkerOptions().position(cityLatLng).title("Marker in ${city.name}"))
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(cityLatLng))
         googleMap.setMinZoomPreference(9F)
-
     }
 
     override fun onCreateView(

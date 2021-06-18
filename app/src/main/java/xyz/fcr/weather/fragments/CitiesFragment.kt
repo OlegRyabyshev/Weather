@@ -32,7 +32,6 @@ import xyz.fcr.weather.objects.City
 import xyz.fcr.weather.objects.CityList
 import java.io.IOException
 
-
 private const val REQUEST_CODE = 12345
 private const val REFRESH_PERIOD = 60000L
 private const val MINIMAL_DISTANCE = 100f
@@ -274,7 +273,7 @@ class CitiesFragment : Fragment() {
             createNewCityAsync(context, cityInput)
         }
 
-        builder.setNegativeButton(android.R.string.cancel) { dialog, which ->
+        builder.setNegativeButton(android.R.string.cancel) { dialog, _ ->
             dialog.cancel()
         }
 
