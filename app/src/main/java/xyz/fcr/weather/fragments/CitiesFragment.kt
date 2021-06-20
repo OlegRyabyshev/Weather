@@ -19,6 +19,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import xyz.fcr.weather.App
@@ -29,7 +30,7 @@ import xyz.fcr.weather.datastore.room.convertToEntity
 import xyz.fcr.weather.datastore.room.convertToEntityList
 import xyz.fcr.weather.fragments.adapters.CitiesAdapter
 import xyz.fcr.weather.objects.City
-import xyz.fcr.weather.objects.CityList
+import xyz.fcr.weather.util.CityList
 import java.io.IOException
 
 private const val REQUEST_CODE = 12345
@@ -41,6 +42,8 @@ class CitiesFragment : Fragment() {
     private val binding get() = _binding!!
     private var buttonClicked: Boolean = false
     private lateinit var listOfCities: MutableList<City>
+
+    private lateinit var citiesRecyclerView: RecyclerView
 
     private val cityDB = App.getHistoryDao()
 
@@ -78,8 +81,11 @@ class CitiesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         loadListOfCities()
-        binding.recyclerViewCities.adapter = CitiesAdapter(listOfCities, activity)
-        binding.recyclerViewCities.setHasFixedSize(true)
+
+        citiesRecyclerView = binding.recyclerViewCities
+
+        citiesRecyclerView.adapter = CitiesAdapter(listOfCities, activity)
+        citiesRecyclerView.setHasFixedSize(true)
 
         fabAdd = binding.fabAdd
         fabAddCity = binding.fabAddCity
@@ -105,7 +111,8 @@ class CitiesFragment : Fragment() {
     }
 
     private fun updateAdapter() {
-        (binding.recyclerViewCities.adapter as CitiesAdapter).notifyDataSetChanged()
+        citiesRecyclerView.adapter?.notifyDataSetChanged()
+        citiesRecyclerView.smoothScrollToPosition(listOfCities.size - 1)
     }
 
     private fun loadListOfCities() {
@@ -191,7 +198,6 @@ class CitiesFragment : Fragment() {
     }
 
     private fun getLocation() {
-
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -218,11 +224,8 @@ class CitiesFragment : Fragment() {
     }
 
     private val onLocationListener = object : LocationListener {
-
         override fun onLocationChanged(location: Location) {
-            context?.let {
-                getAddressAsync(it, location)
-            }
+            context?.let { getAddressAsync(it, location) }
         }
 
         override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}

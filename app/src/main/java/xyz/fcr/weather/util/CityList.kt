@@ -1,4 +1,6 @@
-package xyz.fcr.weather.objects
+package xyz.fcr.weather.util
+
+import xyz.fcr.weather.objects.City
 
 class CityList {
     val list: List<City> = getListOfCities()
@@ -12,11 +14,9 @@ class CityList {
             City("Paris", 48.85, 2.34),
             City("Berlin", 52.53, 13.40),
             City("Rim", 41.90, 12.49),
-            City("Minsk", 53.90, 27.56),
             City("Washington", 38.90, -77.03),
             City("Kiev", 50.45, 30.52),
             City("Beijing", 39.90, 116.40),
-            City("Duduinka", 69.24, 86.11),
             City("Stockholm", 60.12, 18.64)
         )
     }
