@@ -40,6 +40,7 @@ class CitiesFragment : Fragment() {
     private var _binding: CitiesFragmentBinding? = null
     private val binding get() = _binding!!
     private var buttonClicked: Boolean = false
+    private lateinit var listOfCities: MutableList<City>
 
     private val cityDB = App.getHistoryDao()
 
@@ -76,8 +77,8 @@ class CitiesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.recyclerViewCities.adapter = CitiesAdapter(loadListOfCities(), activity)
-
+        loadListOfCities()
+        binding.recyclerViewCities.adapter = CitiesAdapter(listOfCities, activity)
         binding.recyclerViewCities.setHasFixedSize(true)
 
         fabAdd = binding.fabAdd
@@ -107,19 +108,16 @@ class CitiesFragment : Fragment() {
         (binding.recyclerViewCities.adapter as CitiesAdapter).notifyDataSetChanged()
     }
 
-    private fun loadListOfCities(): List<City> {
-        var list = convertToCityList(cityDB.getListOfCities())
+    private fun loadListOfCities() {
+        listOfCities = convertToCityList(cityDB.getListOfCities())
 
-        if (list.isEmpty()) {
-            cityDB.addListCity(convertToEntityList(CityList().list))
-            list = convertToCityList(cityDB.getListOfCities())
+        if (listOfCities.isEmpty()) {
+            listOfCities = CityList().list.toMutableList()
+            cityDB.addListCity(convertToEntityList(listOfCities))
         }
-
-        return list
     }
 
     private fun onButtonClicked() {
-
         //Visibility
         if (!buttonClicked) {
             fabAddLocation.visibility = View.VISIBLE
@@ -242,7 +240,7 @@ class CitiesFragment : Fragment() {
                 val city =
                     City(address[0].adminArea, location.latitude, location.longitude)
 
-                cityDB.addCity(convertToEntity(city))
+                addCityToRepository(city)
                 requireActivity().runOnUiThread { updateAdapter() }
 
             } catch (e: IOException) {
@@ -255,6 +253,11 @@ class CitiesFragment : Fragment() {
                 }
             }
         }.start()
+    }
+
+    private fun addCityToRepository(city: City) {
+        cityDB.addCity(convertToEntity(city))
+        listOfCities.add(city)
     }
 
     private fun showAlertWithCityInput(context: Context) {
@@ -287,7 +290,7 @@ class CitiesFragment : Fragment() {
             try {
                 val address = geoCoder.getFromLocationName(cityString, 1)
                 val city = City(cityString, address[0].latitude, address[0].longitude)
-                cityDB.addCity(convertToEntity(city))
+                addCityToRepository(city)
                 requireActivity().runOnUiThread { updateAdapter() }
 
             } catch (e: IOException) {
