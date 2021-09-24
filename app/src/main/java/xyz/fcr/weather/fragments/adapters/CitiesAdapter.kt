@@ -12,7 +12,6 @@ import xyz.fcr.weather.datastore.CitySaver
 import xyz.fcr.weather.fragments.adapters.CitiesAdapter.*
 import xyz.fcr.weather.objects.City
 
-
 class CitiesAdapter(
     private val exampleList: List<City>,
     private val activityCities: FragmentActivity?
@@ -21,7 +20,7 @@ class CitiesAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityViewHolder {
         val itemView = LayoutInflater.from(parent.context)
-                .inflate(R.layout.cities_item, parent, false)
+            .inflate(R.layout.cities_item, parent, false)
 
         return CityViewHolder(itemView)
     }

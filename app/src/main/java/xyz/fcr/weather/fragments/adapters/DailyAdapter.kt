@@ -1,7 +1,6 @@
 package xyz.fcr.weather.fragments.adapters
 
 import android.annotation.SuppressLint
-import android.graphics.PorterDuff
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.weather_item.view.*
 import xyz.fcr.weather.R
 import xyz.fcr.weather.objects.Daily
+import xyz.fcr.weather.util.loadPicture
 import kotlin.math.roundToInt
 
 class DailyAdapter(private val dailyList: List<Daily>) :
@@ -29,7 +29,8 @@ class DailyAdapter(private val dailyList: List<Daily>) :
         holder.textViewTime.text = toDate(currentItem.dt)
         holder.textViewTemp.text = temperature
         holder.imageViewWeather.setImageResource(
-            loadPicture(currentItem.weather[0].icon, true))
+            loadPicture(currentItem.weather[0].icon, true)
+        )
     }
 
     @SuppressLint("SimpleDateFormat")

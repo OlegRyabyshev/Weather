@@ -20,6 +20,7 @@ import xyz.fcr.weather.datastore.CitySaver
 import xyz.fcr.weather.fragments.adapters.*
 import xyz.fcr.weather.objects.City
 import xyz.fcr.weather.objects.WeatherDTO
+import xyz.fcr.weather.util.loadPicture
 import kotlin.math.roundToInt
 
 class WeatherFragment : Fragment() {

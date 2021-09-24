@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.weather_item.view.*
 import xyz.fcr.weather.R
 import xyz.fcr.weather.objects.Hourly
+import xyz.fcr.weather.util.loadPicture
 import kotlin.math.roundToInt
 
 const val MAX_ITEMS_SHOWN : Int = 25

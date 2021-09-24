@@ -216,7 +216,6 @@ class CitiesFragment : Fragment() {
                     MINIMAL_DISTANCE,
                     onLocationListener
                 )
-
             } else {
                 showRationaleDialog()
             }

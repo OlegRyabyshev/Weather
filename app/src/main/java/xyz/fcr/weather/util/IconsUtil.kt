@@ -1,4 +1,4 @@
-package xyz.fcr.weather.fragments.adapters
+package xyz.fcr.weather.util
 
 import xyz.fcr.weather.R
 

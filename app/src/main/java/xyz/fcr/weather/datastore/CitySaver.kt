@@ -16,13 +16,11 @@ class CitySaver {
             .edit()
             .putString(CURRENT_CITY, cityJson)
             .apply()
-
     }
 
     fun getFromSharedPref(context: Context): City {
         val citySP = context.getSharedPreferences(CURRENT_CITY, Context.MODE_PRIVATE)
         val cityJson = citySP.getString(CURRENT_CITY, "")
-        //val type = object: TypeToken<ArrayList<City>>() {}.type
 
         return if (cityJson == "") {
             City("Moscow", 55.75, 37.61)
