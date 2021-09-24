@@ -1,4 +1,4 @@
-package xyz.fcr.weather.datastore.room
+package xyz.fcr.weather.data.datastore.room
 
 import androidx.room.*
 

@@ -1,8 +1,8 @@
-package xyz.fcr.weather.datastore
+package xyz.fcr.weather.data.datastore
 
 import android.content.Context
 import com.google.gson.Gson
-import xyz.fcr.weather.objects.City
+import xyz.fcr.weather.model.City
 
 const val CURRENT_CITY = "current_city"
 

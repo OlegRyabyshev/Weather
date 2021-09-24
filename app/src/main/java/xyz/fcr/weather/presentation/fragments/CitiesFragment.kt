@@ -1,4 +1,4 @@
-package xyz.fcr.weather.fragments
+package xyz.fcr.weather.presentation.fragments
 
 import android.Manifest
 import android.content.Context
@@ -22,14 +22,14 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import xyz.fcr.weather.App
+import xyz.fcr.weather.presentation.App
 import xyz.fcr.weather.R
 import xyz.fcr.weather.databinding.CitiesFragmentBinding
-import xyz.fcr.weather.datastore.room.convertToCityList
-import xyz.fcr.weather.datastore.room.convertToEntity
-import xyz.fcr.weather.datastore.room.convertToEntityList
-import xyz.fcr.weather.fragments.adapters.CitiesAdapter
-import xyz.fcr.weather.objects.City
+import xyz.fcr.weather.data.datastore.room.convertToCityList
+import xyz.fcr.weather.data.datastore.room.convertToEntity
+import xyz.fcr.weather.data.datastore.room.convertToEntityList
+import xyz.fcr.weather.presentation.fragments.adapters.CitiesAdapter
+import xyz.fcr.weather.model.City
 import xyz.fcr.weather.util.CityList
 import java.io.IOException
 

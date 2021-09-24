@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/light_blue"
     android:orientation="vertical"
-    tools:context=".fragments.CitiesFragment">
+    tools:context=".presentation.fragments.CitiesFragment">
 
     <ImageView
         android:id="@+id/back_button"

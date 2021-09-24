@@ -1,4 +1,4 @@
-package xyz.fcr.weather.fragments
+package xyz.fcr.weather.presentation.fragments
 
 import androidx.fragment.app.Fragment
 
@@ -15,7 +15,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 
 import xyz.fcr.weather.R
 import xyz.fcr.weather.databinding.MapsMainFragmentBinding
-import xyz.fcr.weather.datastore.CitySaver
+import xyz.fcr.weather.data.datastore.CitySaver
 
 class MapsFragment : Fragment() {
     private var _binding: MapsMainFragmentBinding? = null

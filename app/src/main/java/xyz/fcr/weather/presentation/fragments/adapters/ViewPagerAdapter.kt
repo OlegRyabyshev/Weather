@@ -1,11 +1,11 @@
-package xyz.fcr.weather.fragments.adapters
+package xyz.fcr.weather.presentation.fragments.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import xyz.fcr.weather.fragments.HourlyFragment
-import xyz.fcr.weather.fragments.DailyFragment
+import xyz.fcr.weather.presentation.fragments.HourlyFragment
+import xyz.fcr.weather.presentation.fragments.DailyFragment
 
 class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragmentManager, lifecycle) {

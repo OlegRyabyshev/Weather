@@ -1,4 +1,4 @@
-package xyz.fcr.weather.objects
+package xyz.fcr.weather.model
 
 import com.google.gson.annotations.SerializedName
 

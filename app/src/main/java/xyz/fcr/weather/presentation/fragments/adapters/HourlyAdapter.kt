@@ -1,4 +1,4 @@
-package xyz.fcr.weather.fragments.adapters
+package xyz.fcr.weather.presentation.fragments.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.weather_item.view.*
 import xyz.fcr.weather.R
-import xyz.fcr.weather.objects.Hourly
+import xyz.fcr.weather.model.Hourly
 import xyz.fcr.weather.util.loadPicture
 import kotlin.math.roundToInt
 

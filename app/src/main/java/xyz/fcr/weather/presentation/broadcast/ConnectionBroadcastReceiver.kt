@@ -1,4 +1,4 @@
-package xyz.fcr.weather.broadcast
+package xyz.fcr.weather.presentation.broadcast
 
 import android.content.BroadcastReceiver
 import android.content.Context

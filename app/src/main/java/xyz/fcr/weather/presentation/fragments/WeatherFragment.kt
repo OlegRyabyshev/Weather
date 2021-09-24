@@ -1,4 +1,4 @@
-package xyz.fcr.weather.fragments
+package xyz.fcr.weather.presentation.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,13 +13,13 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import xyz.fcr.weather.R
-import xyz.fcr.weather.api.RemoteDataSource
-import xyz.fcr.weather.api.WeatherLiveData
+import xyz.fcr.weather.data.api.RemoteDataSource
+import xyz.fcr.weather.data.api.WeatherLiveData
 import xyz.fcr.weather.databinding.WeatherFragmentBinding
-import xyz.fcr.weather.datastore.CitySaver
-import xyz.fcr.weather.fragments.adapters.*
-import xyz.fcr.weather.objects.City
-import xyz.fcr.weather.objects.WeatherDTO
+import xyz.fcr.weather.data.datastore.CitySaver
+import xyz.fcr.weather.presentation.fragments.adapters.*
+import xyz.fcr.weather.model.City
+import xyz.fcr.weather.model.WeatherDTO
 import xyz.fcr.weather.util.loadPicture
 import kotlin.math.roundToInt
 

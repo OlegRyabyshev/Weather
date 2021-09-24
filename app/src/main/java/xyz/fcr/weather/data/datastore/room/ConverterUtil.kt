@@ -1,6 +1,6 @@
-package xyz.fcr.weather.datastore.room
+package xyz.fcr.weather.data.datastore.room
 
-import xyz.fcr.weather.objects.City
+import xyz.fcr.weather.model.City
 
 fun convertToEntity(city: City): CityEntity {
     return CityEntity(0, city.name, city.lat, city.lon)

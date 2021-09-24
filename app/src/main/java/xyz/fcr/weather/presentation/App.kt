@@ -1,9 +1,9 @@
-package xyz.fcr.weather
+package xyz.fcr.weather.presentation
 
 import android.app.Application
 import androidx.room.Room
-import xyz.fcr.weather.datastore.room.CityDao
-import xyz.fcr.weather.datastore.room.CityDatabase
+import xyz.fcr.weather.data.datastore.room.CityDao
+import xyz.fcr.weather.data.datastore.room.CityDatabase
 
 class App : Application() {
 

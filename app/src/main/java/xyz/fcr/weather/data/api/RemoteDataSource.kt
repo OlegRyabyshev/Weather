@@ -1,10 +1,10 @@
-package xyz.fcr.weather.api
+package xyz.fcr.weather.data.api
 
 import com.google.gson.GsonBuilder
 import retrofit2.Callback
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import xyz.fcr.weather.objects.WeatherDTO
+import xyz.fcr.weather.model.WeatherDTO
 
 class RemoteDataSource {
     private val weatherApi = Retrofit.Builder()

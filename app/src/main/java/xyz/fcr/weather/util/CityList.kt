@@ -1,6 +1,6 @@
 package xyz.fcr.weather.util
 
-import xyz.fcr.weather.objects.City
+import xyz.fcr.weather.model.City
 
 class CityList {
     val list: List<City> = getListOfCities()

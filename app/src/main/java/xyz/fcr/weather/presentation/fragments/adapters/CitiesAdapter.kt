@@ -1,4 +1,4 @@
-package xyz.fcr.weather.fragments.adapters
+package xyz.fcr.weather.presentation.fragments.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +8,9 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.cities_item.view.*
 import xyz.fcr.weather.R
-import xyz.fcr.weather.datastore.CitySaver
-import xyz.fcr.weather.fragments.adapters.CitiesAdapter.*
-import xyz.fcr.weather.objects.City
+import xyz.fcr.weather.data.datastore.CitySaver
+import xyz.fcr.weather.presentation.fragments.adapters.CitiesAdapter.*
+import xyz.fcr.weather.model.City
 
 class CitiesAdapter(
     private val exampleList: List<City>,
