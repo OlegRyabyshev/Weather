@@ -1,7 +1,7 @@
 <h1 align="center">Weather</h1>
 
-- Simple app to check weather around you :)
-- You can find city by searching or your current position
+- Simple app to check the Weather around you :)
+- You can find city by searching or find it by using your current geoposition
 - Using Google APIs for searching and OpenWeatherAPI for weather data
 
 <br />
@@ -32,9 +32,6 @@ Weather + Map Screens
 
 List of cities Screens
 -----------
-
-- Full authentication and registration logic via Firebase
-- Error checking during filling fields
 
 <p float="left">
   <img src="screenshots/list.png" width="220" />
